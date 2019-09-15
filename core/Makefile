@@ -1554,6 +1554,14 @@ endif
 
 .PHONY: recoveryimage
 recoveryimage: $(INSTALLED_RECOVERYIMAGE_TARGET) $(RECOVERY_RESOURCE_ZIP)
+	@echo -e ${CL_RST} "                                            _ _ __"
+	@echo -e ${CL_RST} "   __ __ __  _ __ _  __ _            __   /_ _   /"
+	@echo -e ${CL_RST} "  / _ _// / / / __ \/ __ \   __     / /   _ __/ / "
+	@echo -e ${CL_RST} "  \__ \/ /_/ / /_/ / /_/ /   \ \   / /  / _ _ _/  "
+	@echo -e ${CL_RST} " ___/ / __  / _, _/ ____/     \ \_/ /  / /_ _     "
+	@echo -e ${CL_RST} "/__ _/_/ /_/_/ |_/_/           \__ /  /__ __/     "
+	@echo -e ${CL_RST} "" ${CL_RST}
+	@echo -e ${CL_BLD}${CL_RED}"SHRP Recovery Complete"${CL_RED}
 
 ifneq ($(BOARD_NAND_PAGE_SIZE),)
 $(error MTD device is no longer supported and thus BOARD_NAND_PAGE_SIZE is deprecated.)
