@@ -1410,9 +1410,9 @@ define build-recoveryramdisk
   $(hide) mkdir -p $(TARGET_RECOVERY_OUT)
   $(hide) mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/etc $(TARGET_RECOVERY_ROOT_OUT)/sdcard $(TARGET_RECOVERY_ROOT_OUT)/tmp
   ifeq ($(TARGET_ARCH),arm64)
-  $(hide) cp $(TOP_DIR)/vendor/shrp/aik/arm64/cookies/ $(TARGET_RECOVERY_ROOT_OUT)/etc/cookies
+  $(hide) cp -r $(TOP_DIR)/vendor/shrp/aik/arm64/cookies/* $(TARGET_RECOVERY_ROOT_OUT)/etc/cookies/
   else
-  $(hide) cp $(TOP_DIR)/vendor/shrp/aik/arm/cookies/ $(TARGET_RECOVERY_ROOT_OUT)/etc/cookies
+  $(hide) cp -r $(TOP_DIR)/vendor/shrp/aik/arm/cookies/* $(TARGET_RECOVERY_ROOT_OUT)/etc/cookies/
   endif
   # Copying baseline ramdisk...
   # Use rsync because "cp -Rf" fails to overwrite broken symlinks on Mac.
