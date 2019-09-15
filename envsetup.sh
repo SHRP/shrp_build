@@ -1,3 +1,4 @@
+export ALLOW_MISSING_DEPENDENCIES=true
 function hmm() {
 cat <<EOF
 
