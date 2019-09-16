@@ -1409,10 +1409,10 @@ RECOVERYIMAGE_ID_FILE := $(PRODUCT_OUT)/recovery.id
 define build-recoveryramdisk
   $(hide) mkdir -p $(TARGET_RECOVERY_OUT)
   $(hide) mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/etc $(TARGET_RECOVERY_ROOT_OUT)/sdcard $(TARGET_RECOVERY_ROOT_OUT)/tmp
-  ifeq ($(TARGET_ARCH),arm64)
-  $(hide) cp -r $(TOP_DIR)vendor/shrp/aik/arm64/cookies/* $(TARGET_RECOVERY_ROOT_OUT)/etc/cookies/
+  ifneq ($(TARGET_ARCH),arm64)
+  $(hide) cp -r $(TOP_DIR)vendor/shrp/aik/arm/cookies $(TARGET_RECOVERY_ROOT_OUT)/etc/cookies
   else
-  $(hide) cp -r $(TOP_DIR)vendor/shrp/aik/arm/cookies/* $(TARGET_RECOVERY_ROOT_OUT)/etc/cookies/
+  $(hide) cp -r $(TOP_DIR)vendor/shrp/aik/arm64/cookies $(TARGET_RECOVERY_ROOT_OUT)/etc/cookies
   endif
   # Copying baseline ramdisk...
   # Use rsync because "cp -Rf" fails to overwrite broken symlinks on Mac.
@@ -1554,14 +1554,17 @@ endif
 
 .PHONY: recoveryimage
 recoveryimage: $(INSTALLED_RECOVERYIMAGE_TARGET) $(RECOVERY_RESOURCE_ZIP)
+	@echo -e ${CL_RST} ""
 	@echo -e ${CL_RST} "                                            _ _ __"
 	@echo -e ${CL_RST} "   __ __ __  _ __ _  __ _            __   /_ _   /"
 	@echo -e ${CL_RST} "  / _ _// / / / __ \/ __ \   __     / /   _ __/ / "
 	@echo -e ${CL_RST} "  \__ \/ /_/ / /_/ / /_/ /   \ \   / /  / _ _ _/  "
 	@echo -e ${CL_RST} " ___/ / __  / _, _/ ____/     \ \_/ /  / /_ _     "
 	@echo -e ${CL_RST} "/__ _/_/ /_/_/ |_/_/           \__ /  /__ __/     "
+	@echo -e ${CL_RST} ""
+	@echo -e ${CL_RST} ""
 	@echo -e ${CL_RST} "" ${CL_RST}
-	@echo -e ${CL_BLD}${CL_RED}"SHRP Recovery Complete"${CL_RED}
+	@echo -e ${CL_BLD}${CL_RED}"--------------SHRP Recovery Complete--------------"${CL_RED}
 
 ifneq ($(BOARD_NAND_PAGE_SIZE),)
 $(error MTD device is no longer supported and thus BOARD_NAND_PAGE_SIZE is deprecated.)
