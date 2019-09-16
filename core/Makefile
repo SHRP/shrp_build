@@ -1449,8 +1449,11 @@ define build-recoveryramdisk
   $(hide) ln -sf prop.default $(TARGET_RECOVERY_ROOT_OUT)/default.prop
   $(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/twres
   $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_portrait_hdpi $(TARGET_RECOVERY_ROOT_OUT)/twres
-  $(hide) cp $(TOPDIR)/build/shrp/c_ex_variable.xml $(TARGET_RECOVERY_ROOT_OUT)/twres
-  $(hide) cp $(TOPDIR)/build/shrp/shrp_vital $(TARGET_RECOVERY_ROOT_OUT)
+  $(hide) cp $(SHRP_DEVICE_DIR)/shrp_env.sh $(TOPDIR)build/shrp
+  $(hide) bash $(TOPDIR)build/shrp/shrp_env.sh
+  $(hide) cp $(TOPDIR)build/shrp/c_ex_variable.xml $(TARGET_RECOVERY_ROOT_OUT)/twres
+  $(hide) cp $(TOPDIR)build/shrp/shrp_vital $(TARGET_RECOVERY_ROOT_OUT)
+  
   
   $(BOARD_RECOVERY_IMAGE_PREPARE)
   $(if $(filter true,$(BOARD_BUILD_SYSTEM_ROOT_IMAGE)), \
