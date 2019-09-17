@@ -13,6 +13,15 @@ LOCAL_PATH := $(BUILD_SYSTEM)
 # src:dest pair is the first one to match the same dest"
 #$(1): the src:dest pair
 #$(2): the dest
+ifneq ($(BUILD_WITH_COLORS),0)
+  CL_RED="\033[31m"
+  CL_GRN="\033[32m"
+  CL_YLW="\033[33m"
+  CL_BLU="\033[34m"
+  CL_MAG="\033[35m"
+  CL_CYN="\033[36m"
+  CL_RST="\033[0m"
+endif
 define check-product-copy-files
 $(if $(filter-out $(TARGET_COPY_OUT_SYSTEM_OTHER)/%,$(2)), \
   $(if $(filter %.apk, $(2)),$(error \
@@ -1562,17 +1571,17 @@ endif
 
 .PHONY: recoveryimage
 recoveryimage: $(INSTALLED_RECOVERYIMAGE_TARGET) $(RECOVERY_RESOURCE_ZIP)
-	@echo -e ${CL_RST} ""
-	@echo -e ${CL_RST} "                                            _ _ __"
-	@echo -e ${CL_RST} "   __ __ __  _ __ _  __ _            __   /_ _   /"
-	@echo -e ${CL_RST} "  / _ _// / / / __ \/ __ \   __     / /   _ __/ / "
-	@echo -e ${CL_RST} "  \__ \/ /_/ / /_/ / /_/ /   \ \   / /  / _ _ _/  "
-	@echo -e ${CL_RST} " ___/ / __  / _, _/ ____/     \ \_/ /  / /_ _     "
-	@echo -e ${CL_RST} "/__ _/_/ /_/_/ |_/_/           \__ /  /__ __/     "
-	@echo -e ${CL_RST} ""
-	@echo -e ${CL_RST} ""
-	@echo -e ${CL_RST} "" ${CL_RST}
-	@echo -e ${CL_BLD}${CL_RED}"--------------SHRP Recovery Complete--------------"${CL_RED}
+	@echo -e ${CL_CYN} ""
+	@echo -e ${CL_CYN} "                                            _ _ __"
+	@echo -e ${CL_CYN} "   __ __ __  _ __ _  __ _            __   /_ _   /"
+	@echo -e ${CL_CYN} "  / _ _// / / / __ \/ __ \   __     / /   _ __/ / "
+	@echo -e ${CL_CYN} "  \__ \/ /_/ / /_/ / /_/ /   \ \   / /  / _ _ _/  "
+	@echo -e ${CL_CYN} " ___/ / __  / _, _/ ____/     \ \_/ /  / /_ _     "
+	@echo -e ${CL_CYN} "/__ _/_/ /_/_/ |_/_/           \__ /  /__ __/     "
+	@echo -e ${CL_CYN} ""
+	@echo -e ${CL_CYN} ""
+	@echo -e ${CL_CYN} "" ${CL_CYN}
+	@echo -e ${CL_GRN}"--------------SHRP Recovery Complete--------------"${CL_GRN}
 
 ifneq ($(BOARD_NAND_PAGE_SIZE),)
 $(error MTD device is no longer supported and thus BOARD_NAND_PAGE_SIZE is deprecated.)
