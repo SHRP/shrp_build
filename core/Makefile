@@ -1458,7 +1458,7 @@ define build-recoveryramdisk
 #  $(hide) bash $(TOPDIR)build/shrp/shrp_env.sh
   $(hide) bash $(TOPDIR)build/shrp/shrp.sh
   $(hide) cp $(TOPDIR)build/shrp/c_ex_variables.xml $(TARGET_RECOVERY_ROOT_OUT)/twres
-  $(hide) cp $(TOPDIR)build/shrp/shrp_vital $(TARGET_RECOVERY_ROOT_OUT)
+  $(hide) cp $(TOPDIR)build/shrp/shrp_vital.xml $(TARGET_RECOVERY_ROOT_OUT)
   
   
   $(BOARD_RECOVERY_IMAGE_PREPARE)
