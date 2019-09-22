@@ -1,6 +1,14 @@
 # !/bin/bash
+# 
+# Get current working dir
+# 
+dir="$(pwd)"
+# 
+# Run shrp env variables from here
+#
+source "${dir}"/build/shrp/shrp_env.sh
 
-cat > ~/twrp/build/shrp/c_ex_variables.xml <<EOF
+cat > "${dir}"/build/shrp/c_ex_variables.xml <<EOF
 <?xml version="1.0"?>
 <recovery>
 	<details>
@@ -53,11 +61,11 @@ $SHRP_FOFP_3
 </recovery>
 EOF
 
-cat > ~/twrp/build/shrp/shrp_vital.xml <<EOF
+cat > "${dir}"/build/shrp/shrp_vital.xml <<EOF
 ro.shrp.recovery.block=$SHRP_REC
 EOF
 
-cat > ~/twrp/build/shrp/updater-script <<EOF
+cat > "${dir}"/build/shrp/updater-script <<EOF
 show_progress(1.000000, 0);
 ui_print("                                            _ _ __");
 ui_print("   __ __ __  _ __ _  __ _            __   /_ _   /");
@@ -116,4 +124,4 @@ set_progress(1.000000);
 ui_print("");
 EOF
 
-cp ~/twrp/build/shrp/c_ex_variables.xml ~/twrp/bootable/recovery/gui/theme/shrp_portrait_hdpi/
+cp "${dir}"/build/shrp/c_ex_variables.xml "${dir}"/bootable/recovery/gui/theme/shrp_portrait_hdpi/
