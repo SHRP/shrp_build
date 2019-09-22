@@ -38,9 +38,9 @@ cat > "${dir}"/build/shrp/c_ex_variables.xml <<EOF
 				<image resource="c_flashlight_on"/>
 				<actions>
 					<action function="cmd">
-$SHRP_FONP_1
-$SHRP_FONP_2
-$SHRP_FONP_3
+echo $SHRP_FLASH_MAX_BRIGHTNESS > $SHRP_FONP_1
+echo $SHRP_FLASH_MAX_BRIGHTNESS > $SHRP_FONP_2
+echo 1 > $SHRP_FONP_3
 					</action>
 				</actions>
 			</button>
@@ -50,9 +50,9 @@ $SHRP_FONP_3
 				<image resource="c_flashlight_off"/>
 				<actions>
 					<action function="cmd">
-$SHRP_FOFP_1
-$SHRP_FOFP_2
-$SHRP_FOFP_3
+echo 0 > $SHRP_FONP_1
+echo 0 > $SHRP_FONP_2
+echo 0 > $SHRP_FONP_3
 					</action>
 				</actions>
 			</button>
@@ -61,7 +61,7 @@ $SHRP_FOFP_3
 </recovery>
 EOF
 
-cat > "${dir}"/build/shrp/shrp_vital.xml <<EOF
+cat > "${dir}"/build/shrp/shrp_vital <<EOF
 ro.shrp.recovery.block=$SHRP_REC
 EOF
 
