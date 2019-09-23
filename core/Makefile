@@ -1580,6 +1580,7 @@ recoveryimage: $(INSTALLED_RECOVERYIMAGE_TARGET) $(RECOVERY_RESOURCE_ZIP)
 	@echo -e ${CL_CYN} ""
 	@echo -e ${CL_CYN} "" ${CL_CYN}
 	@echo -e ${CL_GRN}"--------------SHRP Recovery Complete--------------"${CL_GRN}
+	$(BASH) $(SHRP_SCRIPT)
 
 ifneq ($(BOARD_NAND_PAGE_SIZE),)
 $(error MTD device is no longer supported and thus BOARD_NAND_PAGE_SIZE is deprecated.)
