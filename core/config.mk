@@ -755,6 +755,10 @@ else
 MD5SUM:=md5sum
 endif
 
+# Define shrp scripts
+SHRP_SCRIPT := vendor/shrp/shrp_final.sh
+BASH := bash
+
 APICHECK_CLASSPATH_ENTRIES := \
     $(HOST_OUT_JAVA_LIBRARIES)/doclava$(COMMON_JAVA_PACKAGE_SUFFIX) \
     $(HOST_OUT_JAVA_LIBRARIES)/jsilver$(COMMON_JAVA_PACKAGE_SUFFIX) \
