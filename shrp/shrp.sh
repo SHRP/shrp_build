@@ -81,7 +81,7 @@ ui_print("Skyhawk Recovery Project                          ");
 ui_print("--------------------------------------------------");
 ui_print("Details-                                          ");
 ui_print("SHRP version - 2.1 Stable                         ");
-ui_print("Device - $SHRP_DEVICE_CODE");
+ui_print("Device - $SHRP_DEVICE");
 ui_print("Maintainer - $SHRP_MAINTAINER");
 ui_print("                                                  ");
 ui_print("                                                  ");
