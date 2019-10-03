@@ -1418,8 +1418,8 @@ RECOVERYIMAGE_ID_FILE := $(PRODUCT_OUT)/recovery.id
 define build-recoveryramdisk
   $(hide) mkdir -p $(TARGET_RECOVERY_OUT)
   $(hide) mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/etc $(TARGET_RECOVERY_ROOT_OUT)/sdcard $(TARGET_RECOVERY_ROOT_OUT)/tmp
-  $(hide) mkdir -p $(OUT)/zip/Files/epicx
-  $(if $(filter arm64,$(TARGET_ARCH)), cp -r $(TOP_DIR)vendor/shrp/aik/arm64/cookies $(OUT)/zip/Files/epicx/cookies, cp -r $(TOP_DIR)vendor/shrp/aik/arm/cookies $(OUT)/zip/Files/epicx/cookies)
+  $(hide) mkdir -p $(PRODUCT_OUT)/zip/Files/epicx
+  $(if $(filter arm64,$(TARGET_ARCH)), cp -r $(TOP_DIR)vendor/shrp/aik/arm64/cookies $(PRODUCT_OUT)/zip/Files/epicx/cookies, cp -r $(TOP_DIR)vendor/shrp/aik/arm/cookies $(PRODUCT_OUT)/zip/Files/epicx/cookies)
   # Copying baseline ramdisk...
   # Use rsync because "cp -Rf" fails to overwrite broken symlinks on Mac.
   $(hide) rsync -a --exclude=etc --exclude=sdcard --exclude=vendor $(IGNORE_RECOVERY_SEPOLICY) $(IGNORE_CACHE_LINK) $(TARGET_ROOT_OUT) $(TARGET_RECOVERY_OUT)
