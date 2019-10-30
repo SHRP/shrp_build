@@ -48,28 +48,22 @@ cat > "${dir}"/build/shrp/c_ex_variables.xml <<EOF
 	<templates>
 		<template name="flashlight">
 			<button>
-				<condition var1="has_flashlight" op="=" var2="1"/>
+				<conditions>
+					<condition var1="has_flashlight" op="=" var2="1"/>
+					<condition var1="c_flashlight_status" op="=" var2="0"/>
+				</conditions>
 				<placement x="975" y="1814"/>
 				<image resource="c_flashlight_on"/>
-				<actions>
-					<action function="cmd">
-echo $SHRP_FLASH_MAX_BRIGHTNESS > $SHRP_FONP_1
-echo $SHRP_FLASH_MAX_BRIGHTNESS > $SHRP_FONP_2
-echo 1 > $SHRP_FONP_3
-					</action>
-				</actions>
+				<action function="flashlight"/>
 			</button>
 			<button>
-				<condition var1="has_flashlight" op="=" var2="1"/>
+				<conditions>
+					<condition var1="has_flashlight" op="=" var2="1"/>
+					<condition var1="c_flashlight_status" op="=" var2="1"/>
+				</conditions>
 				<placement x="35" y="1814"/>
 				<image resource="c_flashlight_off"/>
-				<actions>
-					<action function="cmd">
-echo 0 > $SHRP_FONP_1
-echo 0 > $SHRP_FONP_2
-echo 0 > $SHRP_FONP_3
-					</action>
-				</actions>
+				<action function="flashlight"/>
 			</button>
 		</template>
 	</templates>
