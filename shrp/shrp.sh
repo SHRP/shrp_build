@@ -37,11 +37,8 @@ cat > "${dir}"/build/shrp/c_ex_variables.xml <<EOF
 	<variables>
 		<variable name="usb_otg_location" value="$SHRP_OTG"/>
 		<variable name="external_storage_location" value="$SHRP_EXTERNAL"/>
-		<variable name="internal_storage_location" value="$SHRP_INTERNAL"/>
 		<variable name="device_code_name" value="$SHRP_DEVICE"/>
 		<variable name="device_maintainer_name" value="$SHRP_MAINTAINER"/>
-		<variable name="shrp_ver" value="V2.1"/>
-		<variable name="shrp_ver_status" value="Stable"/>
 		<variable name="has_edl_mode" value="$SHRP_EDL_MODE"/>
 		<variable name="has_flashlight" value="$SHRP_FLASH"/>
 	</variables>
