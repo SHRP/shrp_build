@@ -1453,14 +1453,16 @@ define build-recoveryramdisk
   $(hide) cat $(recovery_build_props) \
           >> $(TARGET_RECOVERY_ROOT_OUT)/prop.default
   $(hide) ln -sf prop.default $(TARGET_RECOVERY_ROOT_OUT)/default.prop
-#SHRP_BUILD_START
+
+
+### SHRP - STARTING BUILD ###
   $(hide) cp $(SHRP_PATH)/shrp_env.sh $(TOPDIR)build/shrp
-#  $(hide) bash $(TOPDIR)build/shrp/shrp_env.sh
+  #$(hide) bash $(TOPDIR)build/shrp/shrp_env.sh
   $(hide) bash $(TOPDIR)build/shrp/shrp.sh
   $(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/twres
   $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_portrait_hdpi $(TARGET_RECOVERY_ROOT_OUT)/twres
   $(hide) cp $(TOPDIR)build/shrp/shrp_vital $(TARGET_RECOVERY_ROOT_OUT)
-#SHRP_BUILD_END
+### SHRP - END BUILD ###
   
   
   $(BOARD_RECOVERY_IMAGE_PREPARE)
