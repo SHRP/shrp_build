@@ -3,6 +3,8 @@
 # HACK: clear LOCAL_PATH from including last build target before calling
 # intermedites-dir-for
 LOCAL_PATH := $(BUILD_SYSTEM)
+MAKE_ENV := $(shell echo '$(.VARIABLES)' | awk -v RS=' ' '/^[a-zA-Z0-9_]+$$/')
+SHELL_EXPORT := $(foreach v,$(MAKE_ENV),$(v)='$($(v))')
 
 # -----------------------------------------------------------------
 # Define rules to copy PRODUCT_COPY_FILES defined by the product.
@@ -1395,6 +1397,13 @@ ifeq ($(strip $(BOARD_KERNEL_SEPARATED_DT)),true)
   RECOVERYIMAGE_EXTRA_DEPS    := $(INSTALLED_DTIMAGE_TARGET)
 endif
 
+ifeq ($(SHRP_AB),true)
+  SHRPSCRIPT := $(TOPDIR)build/shrp/shrp_ab.sh
+endif
+ifndef SHRP_AB
+  SHRPSCRIPT := $(TOPDIR)build/shrp/shrp.sh
+endif
+
 # Keys authorized to sign OTA packages this build will accept.  The
 # build always uses dev-keys for this; release packaging tools will
 # substitute other keys for this one.
@@ -1456,12 +1465,25 @@ define build-recoveryramdisk
 
 
 ### SHRP - STARTING BUILD ###
-  $(hide) cp $(SHRP_PATH)/shrp_env.sh $(TOPDIR)build/shrp
-  #$(hide) bash $(TOPDIR)build/shrp/shrp_env.sh
-  $(hide) bash $(TOPDIR)build/shrp/shrp.sh
+	echo '$(SHRP_MAINTAINER) ' > $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_DEVICE_CODE) ' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_EDL_MODE)' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_EXTERNAL)' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_INTERNAL)' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_OTG)' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_FLASH)' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_FLASH_MAX_BRIGHTNESS)' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_FONP_1)' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_FONP_2)' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_FONP_3)' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_REC)' > $(TOPDIR)build/shrp/shrp_vital
+	echo '$(SHRP_AB) ' > $(TOPDIR)build/shrp/ab
   $(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/twres
   $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_portrait_hdpi $(TARGET_RECOVERY_ROOT_OUT)/twres
   $(hide) cp $(TOPDIR)build/shrp/shrp_vital $(TARGET_RECOVERY_ROOT_OUT)
+  #$(hide) cp $(SHRP_PATH)/shrp_variables $(TOPDIR)build/shrp
+  #$(hide) bash $(TOPDIR)build/shrp/shrp_variables
+  $(hide) bash $(SHRPSCRIPT)
 ### SHRP - END BUILD ###
   
   
@@ -1583,7 +1605,7 @@ recoveryimage: $(INSTALLED_RECOVERYIMAGE_TARGET) $(RECOVERY_RESOURCE_ZIP)
 	@echo -e ${CL_CYN} ""
 	@echo -e ${CL_CYN} ""
 	@echo -e ${CL_CYN} "" ${CL_CYN}
-	@echo -e ${CL_GRN}"--------------SHRP Recovery Complete--------------"${CL_GRN}
+	@echo -e ${CL_GRN} "-----------SHRP Recovery Build Complete-----------"${CL_GRN}
 
 ifneq ($(BOARD_NAND_PAGE_SIZE),)
 $(error MTD device is no longer supported and thus BOARD_NAND_PAGE_SIZE is deprecated.)

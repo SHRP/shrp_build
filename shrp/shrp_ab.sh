@@ -20,7 +20,6 @@
 dir="$(pwd)"
 # 
 # SHRP VARIABLES
-# SHRP VARIABLES
 SHRP_MAINTAINER_TMP=$(sed -n '1p' "$(pwd)/build/shrp/variables")
 SHRP_DEVICE_TMP=$(sed -n '2p' "$(pwd)/build/shrp/variables")
 SHRP_EDL_MODE_TMP=$(sed -n '3p' "$(pwd)/build/shrp/variables")
@@ -44,6 +43,9 @@ SHRP_FLASH_MAX_BRIGHTNESS=$SHRP_FLASH_MAX_BRIGHTNESS_TMP
 SHRP_FONP_1=$SHRP_FONP_1_TMP
 SHRP_FONP_2=$SHRP_FONP_2_TMP
 SHRP_FONP_3=$SHRP_FONP_3_TMP
+
+tool="/data/local/twrp-install/magiskboot"
+
 
 cat > "${dir}"/build/shrp/c_ex_variables.xml <<EOF
 <?xml version="1.0"?>
@@ -98,12 +100,7 @@ echo 0 > $SHRP_FONP_3
 </recovery>
 EOF
 
-cat > "${dir}"/build/shrp/shrp_vital <<EOF
-ro.shrp.recovery.block=$SHRP_REC
-EOF
-
-cat > "${dir}"/build/shrp/updater-script <<EOF
-show_progress(1.000000, 0);
+cat > "${dir}"/build/shrp/update-binary-b <<EOF
 ui_print("                                            _ _ __");
 ui_print("   __ __ __  _ __ _  __ _            __   /_ _   /");
 ui_print("  / _ _// / / / __ \/ __ \   __     / /   _ __/ / ");
@@ -131,8 +128,32 @@ ui_print("                                                  ");
 sleep(2);
 ui_print("Flashing Recovery...");
 ui_print("--------------------------------------------------");
-package_extract_file("Files/SHRP/epicx/recovery.img", "$SHRP_REC");
+
+EOF
+
+cat > "${dir}"/build/shrp/update-binary-c <<EOF
+tool="/data/local/twrp-install/magiskboot"
+dd if=/dev/block/bootdevice/by-name/boot_a "of=$target"
+"$tool" --unpack boot.img
+cp -f ramdisk-recovery.cpio ramdisk.cpio
+"$tool" --repack boot.img
+dd if=new-boot.img of=/dev/block/bootdevice/by-name/boot_a
+rm boot.img
+rm dtb
+rm kernel
+rm new-boot.img
+rm ramdisk.cpio
+ui_print("Running boot image patcher on slot B...");
+dd if=/dev/block/bootdevice/by-name/boot_b "of=$target"
+"$tool" --unpack boot.img
+cp -f ramdisk-recovery.cpio ramdisk.cpio
+"$tool" --repack boot.img
+dd if=new-boot.img of=/dev/block/bootdevice/by-name/boot_b
 sleep(1);
+
+EOF
+
+cat > "${dir}"/build/shrp/update-binary-d <<EOF
 ui_print("                                                  ");
 ui_print("                                                  ");
 set_progress(0.700000);
@@ -159,6 +180,8 @@ ui_print("Our Telegram Group- t.me/sky_hawk                 ");
 ui_print("YT Channel- youtube.com/epicspicy                 ");
 set_progress(1.000000);
 ui_print("");
+
 EOF
 
 cp "${dir}"/build/shrp/c_ex_variables.xml "${dir}"/bootable/recovery/gui/theme/shrp_portrait_hdpi/
+

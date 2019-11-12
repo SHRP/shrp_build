@@ -755,7 +755,7 @@ else
 MD5SUM:=md5sum
 endif
 
-# Define shrp scripts
+# Define SHRP scripts
 SHRP_SCRIPT := vendor/shrp/shrp_final.sh
 BASH := bash
 
