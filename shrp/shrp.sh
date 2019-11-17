@@ -32,6 +32,7 @@ SHRP_FLASH_MAX_BRIGHTNESS_TMP=$(sed -n '8p' "$(pwd)/build/shrp/variables")
 SHRP_FONP_1_TMP=$(sed -n '9p' "$(pwd)/build/shrp/variables")
 SHRP_FONP_2_TMP=$(sed -n '10p' "$(pwd)/build/shrp/variables")
 SHRP_FONP_3_TMP=$(sed -n '11p' "$(pwd)/build/shrp/variables")
+SHRP_REC_TMP=$(sed -n '12p' "$(pwd)/build/shrp/variables")
 
 SHRP_MAINTAINER=$SHRP_MAINTAINER_TMP
 SHRP_DEVICE=$SHRP_DEVICE_TMP
@@ -44,6 +45,7 @@ SHRP_FLASH_MAX_BRIGHTNESS=$SHRP_FLASH_MAX_BRIGHTNESS_TMP
 SHRP_FONP_1=$SHRP_FONP_1_TMP
 SHRP_FONP_2=$SHRP_FONP_2_TMP
 SHRP_FONP_3=$SHRP_FONP_3_TMP
+SHRP_REC=$SHRP_REC_TMP
 
 cat > "${dir}"/build/shrp/c_ex_variables.xml <<EOF
 <?xml version="1.0"?>

@@ -1476,7 +1476,7 @@ define build-recoveryramdisk
 	echo '$(SHRP_FONP_1)' >> $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_FONP_2)' >> $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_FONP_3)' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_REC)' > $(TOPDIR)build/shrp/shrp_vital
+	echo '$(SHRP_REC)' > $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_AB) ' > $(TOPDIR)build/shrp/ab
   $(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/twres
   $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_portrait_hdpi $(TARGET_RECOVERY_ROOT_OUT)/twres
