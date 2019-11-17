@@ -1397,14 +1397,9 @@ ifeq ($(strip $(BOARD_KERNEL_SEPARATED_DT)),true)
   RECOVERYIMAGE_EXTRA_DEPS    := $(INSTALLED_DTIMAGE_TARGET)
 endif
 
+SHRPSCRIPT := $(TOPDIR)build/shrp/shrp.sh
 ifeq ($(SHRP_AB),true)
   SHRPSCRIPT := $(TOPDIR)build/shrp/shrp_ab.sh
-endif
-ifeq ($(SHRP_AB),false)
-  SHRPSCRIPT := $(TOPDIR)build/shrp/shrp.sh
-endif
-ifndef SHRP_AB
-  SHRPSCRIPT := $(TOPDIR)build/shrp/shrp.sh
 endif
 
 # Keys authorized to sign OTA packages this build will accept.  The
