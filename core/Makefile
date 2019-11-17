@@ -1400,6 +1400,9 @@ endif
 ifeq ($(SHRP_AB),true)
   SHRPSCRIPT := $(TOPDIR)build/shrp/shrp_ab.sh
 endif
+ifeq ($(SHRP_AB),false)
+  SHRPSCRIPT := $(TOPDIR)build/shrp/shrp.sh
+endif
 ifndef SHRP_AB
   SHRPSCRIPT := $(TOPDIR)build/shrp/shrp.sh
 endif
@@ -1476,17 +1479,17 @@ define build-recoveryramdisk
 	echo '$(SHRP_FONP_1)' >> $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_FONP_2)' >> $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_FONP_3)' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_REC)' > $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_REC)' >> $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_AB) ' > $(TOPDIR)build/shrp/ab
   $(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/twres
+	$(hide) bash $(SHRPSCRIPT)
   $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_portrait_hdpi $(TARGET_RECOVERY_ROOT_OUT)/twres
   $(hide) cp $(TOPDIR)build/shrp/shrp_vital $(TARGET_RECOVERY_ROOT_OUT)
   #$(hide) cp $(SHRP_PATH)/shrp_variables $(TOPDIR)build/shrp
   #$(hide) bash $(TOPDIR)build/shrp/shrp_variables
-  $(hide) bash $(SHRPSCRIPT)
 ### SHRP - END BUILD ###
-  
-  
+
+
   $(BOARD_RECOVERY_IMAGE_PREPARE)
   $(if $(filter true,$(BOARD_BUILD_SYSTEM_ROOT_IMAGE)), \
     $(hide) mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/system_root; \

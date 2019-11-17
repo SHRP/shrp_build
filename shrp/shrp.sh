@@ -16,9 +16,9 @@
 ##########################################################################
 
 # Get current working dir
-# 
+#
 dir="$(pwd)"
-# 
+#
 # SHRP VARIABLES
 # SHRP VARIABLES
 SHRP_MAINTAINER_TMP=$(sed -n '1p' "$(pwd)/build/shrp/variables")

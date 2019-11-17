@@ -16,9 +16,9 @@
 ##########################################################################
 
 # Get current working dir
-# 
+#
 dir="$(pwd)"
-# 
+#
 # SHRP VARIABLES
 SHRP_MAINTAINER_TMP=$(sed -n '1p' "$(pwd)/build/shrp/variables")
 SHRP_DEVICE_TMP=$(sed -n '2p' "$(pwd)/build/shrp/variables")
@@ -184,4 +184,3 @@ ui_print("");
 EOF
 
 cp "${dir}"/build/shrp/c_ex_variables.xml "${dir}"/bootable/recovery/gui/theme/shrp_portrait_hdpi/
-
