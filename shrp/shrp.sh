@@ -19,8 +19,8 @@
 #
 dir="$(pwd)"
 #
-# Run shrp env variables from here
-#
+# SHRP VARIABLES
+# SHRP VARIABLES
 SHRP_MAINTAINER_TMP=$(sed -n '1p' "$(pwd)/build/shrp/variables")
 SHRP_DEVICE_TMP=$(sed -n '2p' "$(pwd)/build/shrp/variables")
 SHRP_EDL_MODE_TMP=$(sed -n '3p' "$(pwd)/build/shrp/variables")
