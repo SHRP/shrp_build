@@ -121,6 +121,7 @@ ui_print("                                                  ");
 ui_print("                                                  ");
 ui_print("Installing Addons...");
 ui_print("--------------------------------------------------");
+delete_recursive("/sdcard/SHRP");
 package_extract_dir("Files", "/sdcard/");
 set_progress(0.500000);
 ui_print("                                                  ");

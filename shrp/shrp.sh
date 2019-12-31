@@ -19,8 +19,8 @@
 #
 dir="$(pwd)"
 #
-# SHRP VARIABLES
-# SHRP VARIABLES
+# Run shrp env variables from here
+#
 SHRP_MAINTAINER_TMP=$(sed -n '1p' "$(pwd)/build/shrp/variables")
 SHRP_DEVICE_TMP=$(sed -n '2p' "$(pwd)/build/shrp/variables")
 SHRP_EDL_MODE_TMP=$(sed -n '3p' "$(pwd)/build/shrp/variables")
@@ -126,6 +126,7 @@ ui_print("                                                  ");
 ui_print("                                                  ");
 ui_print("Installing Addons...");
 ui_print("--------------------------------------------------");
+delete_recursive("/sdcard/SHRP");
 package_extract_dir("Files", "/sdcard/");
 set_progress(0.500000);
 ui_print("                                                  ");
@@ -133,7 +134,7 @@ ui_print("                                                  ");
 sleep(2);
 ui_print("Flashing Recovery...");
 ui_print("--------------------------------------------------");
-package_extract_file("Files/SHRP/epicx/recovery.img", "$SHRP_REC");
+package_extract_file("Files/SHRP/data/recovery.img", "$SHRP_REC");
 sleep(1);
 ui_print("                                                  ");
 ui_print("                                                  ");
