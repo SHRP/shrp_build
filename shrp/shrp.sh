@@ -47,59 +47,6 @@ SHRP_FONP_2=$SHRP_FONP_2_TMP
 SHRP_FONP_3=$SHRP_FONP_3_TMP
 SHRP_REC=$SHRP_REC_TMP
 
-cat > "${dir}"/build/shrp/c_ex_variables.xml <<EOF
-<?xml version="1.0"?>
-<recovery>
-	<details>
-		<resolution width="1080" height="1920"/>
-		<author>Teamwin | epicX</author>
-		<title>SKY HAWK RECOVERY PROJECT</title>
-		<description>Only_here_you_need_to_change_your_values</description>
-		<preview>preview.png</preview>
-		<themeversion>3</themeversion>
-	</details>
-	<variables>
-		<variable name="usb_otg_location" value="$SHRP_OTG"/>
-		<variable name="external_storage_location" value="$SHRP_EXTERNAL"/>
-		<variable name="internal_storage_location" value="$SHRP_INTERNAL"/>
-		<variable name="device_code_name" value="$SHRP_DEVICE"/>
-		<variable name="device_maintainer_name" value="$SHRP_MAINTAINER"/>
-		<variable name="has_edl_mode" value="$SHRP_EDL_MODE"/>
-		<variable name="has_flashlight" value="$SHRP_FLASH"/>
-		<variable name="c_flashlight_path_1" value="$SHRP_FONP_1"/>
-		<variable name="c_flashlight_path_2" value="$SHRP_FONP_2"/>
-		<variable name="c_flashlight_path_3" value="$SHRP_FONP_3"/>
-		<variable name="c_flashlight_max_brightness" value="$SHRP_FLASH_MAX_BRIGHTNESS"/>
-	</variables>
-	<templates>
-		<template name="flashlight">
-			<button>
-				<conditions>
-					<condition var1="has_flashlight" op="=" var2="1"/>
-					<condition var1="c_flashlight_status" op="=" var2="0"/>
-				</conditions>
-				<placement x="975" y="1814"/>
-				<image resource="c_flashlight_on"/>
-				<actions>
-					<action function="flashlight"/>
-				</actions>
-			</button>
-			<button>
-				<conditions>
-					<condition var1="has_flashlight" op="=" var2="1"/>
-					<condition var1="c_flashlight_status" op="=" var2="1"/>
-				</conditions>
-				<placement x="35" y="1814"/>
-				<image resource="c_flashlight_off"/>
-				<actions>
-					<action function="flashlight"/>
-				</actions>
-			</button>
-		</template>
-	</templates>
-</recovery>
-EOF
-
 cat > "${dir}"/build/shrp/shrp_vital <<EOF
 ro.shrp.recovery.block=$SHRP_REC
 EOF
@@ -163,5 +110,3 @@ ui_print("YT Channel- youtube.com/epicspicy                 ");
 set_progress(1.000000);
 ui_print("");
 EOF
-
-cp "${dir}"/build/shrp/c_ex_variables.xml "${dir}"/bootable/recovery/gui/theme/shrp_portrait_hdpi/
