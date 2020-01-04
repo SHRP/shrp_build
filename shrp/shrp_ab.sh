@@ -81,9 +81,9 @@ EOF
 cat > "${dir}"/build/shrp/update-binary-c <<EOF
 tool="/data/local/twrp-install/magiskboot"
 dd if=/dev/block/bootdevice/by-name/boot_a "of=$target"
-"$tool" --unpack boot.img
+"$tool" unpack -h boot.img
 cp -f ramdisk-recovery.cpio ramdisk.cpio
-"$tool" --repack boot.img
+"$tool" repack boot.img new-boot.img
 dd if=new-boot.img of=/dev/block/bootdevice/by-name/boot_a
 rm boot.img
 rm dtb
@@ -92,9 +92,9 @@ rm new-boot.img
 rm ramdisk.cpio
 ui_print("Running boot image patcher on slot B...");
 dd if=/dev/block/bootdevice/by-name/boot_b "of=$target"
-"$tool" --unpack boot.img
+"$tool" unpack -h boot.img
 cp -f ramdisk-recovery.cpio ramdisk.cpio
-"$tool" --repack boot.img
+"$tool" repack boot.img new-boot.img
 dd if=new-boot.img of=/dev/block/bootdevice/by-name/boot_b
 sleep(1);
 
