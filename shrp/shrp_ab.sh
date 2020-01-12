@@ -18,6 +18,7 @@
 # Get current working dir
 #
 dir="$(pwd)"
+target="/data/local/twrp-install/boot.img"
 #
 # SHRP VARIABLES
 SHRP_MAINTAINER_TMP=$(sed -n '1p' "$(pwd)/build/shrp/variables")
