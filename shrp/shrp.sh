@@ -21,31 +21,9 @@ dir="$(pwd)"
 #
 # Run shrp env variables from here
 #
-SHRP_MAINTAINER_TMP=$(sed -n '1p' "$(pwd)/build/shrp/variables")
-SHRP_DEVICE_TMP=$(sed -n '2p' "$(pwd)/build/shrp/variables")
-SHRP_EDL_MODE_TMP=$(sed -n '3p' "$(pwd)/build/shrp/variables")
-SHRP_EXTERNAL_TMP=$(sed -n '4p' "$(pwd)/build/shrp/variables")
-SHRP_INTERNAL_TMP=$(sed -n '5p' "$(pwd)/build/shrp/variables")
-SHRP_OTG_TMP=$(sed -n '6p' "$(pwd)/build/shrp/variables")
-SHRP_FLASH_TMP=$(sed -n '7p' "$(pwd)/build/shrp/variables")
-SHRP_FLASH_MAX_BRIGHTNESS_TMP=$(sed -n '8p' "$(pwd)/build/shrp/variables")
-SHRP_FONP_1_TMP=$(sed -n '9p' "$(pwd)/build/shrp/variables")
-SHRP_FONP_2_TMP=$(sed -n '10p' "$(pwd)/build/shrp/variables")
-SHRP_FONP_3_TMP=$(sed -n '11p' "$(pwd)/build/shrp/variables")
-SHRP_REC_TMP=$(sed -n '12p' "$(pwd)/build/shrp/variables")
-
-SHRP_MAINTAINER=$SHRP_MAINTAINER_TMP
-SHRP_DEVICE=$SHRP_DEVICE_TMP
-SHRP_EDL_MODE=$SHRP_EDL_MODE_TMP
-SHRP_EXTERNAL=$SHRP_EXTERNAL_TMP
-SHRP_INTERNAL=$SHRP_INTERNAL_TMP
-SHRP_OTG=$SHRP_OTG_TMP
-SHRP_FLASH=$SHRP_FLASH_TMP
-SHRP_FLASH_MAX_BRIGHTNESS=$SHRP_FLASH_MAX_BRIGHTNESS_TMP
-SHRP_FONP_1=$SHRP_FONP_1_TMP
-SHRP_FONP_2=$SHRP_FONP_2_TMP
-SHRP_FONP_3=$SHRP_FONP_3_TMP
-SHRP_REC=$SHRP_REC_TMP
+SHRP_MAINTAINER=$(sed -n '1p' "$(pwd)/build/shrp/variables")
+SHRP_DEVICE=$(sed -n '2p' "$(pwd)/build/shrp/variables")
+SHRP_REC=$(sed -n '3p' "$(pwd)/build/shrp/variables")
 
 cat > "${dir}"/build/shrp/shrp_vital <<EOF
 ro.shrp.recovery.block=$SHRP_REC
@@ -53,60 +31,34 @@ EOF
 
 cat > "${dir}"/build/shrp/updater-script <<EOF
 show_progress(1.000000, 0);
-ui_print("                                            _ _ __");
-ui_print("   __ __ __  _ __ _  __ _            __   /_ _   /");
-ui_print("  / _ _// / / / __ \/ __ \   __     / /   _ __/ / ");
-ui_print("  \__ \/ /_/ / /_/ / /_/ /   \ \   / /  / _ _ _/  ");
-ui_print(" ___/ / __  / _, _/ ____/     \ \_/ /  / /_ _     ");
-ui_print("/__ _/_/ /_/_/ |_/_/           \__ /  /__ __/     ");
-ui_print("                                                  ");
-ui_print("                                                  ");
-ui_print("                                                  ");
-sleep(2);
-ui_print("Skyhawk Recovery Project                          ");
-ui_print("--------------------------------------------------");
-ui_print("Details-                                          ");
-ui_print("SHRP version - 2.2 Beta                           ");
-ui_print("Device - $SHRP_DEVICE");
-ui_print("Maintainer - $SHRP_MAINTAINER");
-ui_print("                                                  ");
-ui_print("                                                  ");
-ui_print("Installing Addons...");
-ui_print("--------------------------------------------------");
+ui_print("             ");
+ui_print("Skyhawk Recovery Project                  ");
+ui_print("|SHRP version - 2.2 Beta                  ");
+ui_print("|Device - $SHRP_DEVICE");
+ui_print("|Maintainer - $SHRP_MAINTAINER");
 delete_recursive("/sdcard/SHRP");
 package_extract_dir("Files", "/sdcard/");
 set_progress(0.500000);
-ui_print("                                                  ");
-ui_print("                                                  ");
-sleep(2);
-ui_print("Flashing Recovery...");
-ui_print("--------------------------------------------------");
-package_extract_file("Files/SHRP/data/recovery.img", "$SHRP_REC");
-sleep(1);
-ui_print("                                                  ");
-ui_print("                                                  ");
+package_extract_file("recovery.img", "$SHRP_REC");
 set_progress(0.700000);
-ui_print("Installation Completed                            ");
-ui_print("--------------------------------------------------");
-ui_print("                                                  ");
 ui_print("                                                  ");
 ui_print("Credits,                                          ");
-ui_print("--------------------------------------------------");
+ui_print(" TeamSHRP - epicX | Dni9 | Giovix 92              ");
+ui_print(" Thanks to -                                      ");
+ui_print("  + osmOsis for various scripts                   ");
+ui_print("  + Teamwin for TWRP                              ");
+ui_print("  + Topjohnwu for Magisk                          ");
+ui_print("  + VR25 for Magisk mount scripts                 ");
+ui_print("  + Pritish joshi for translation                 ");
+ui_print("  + Kirill for translation                        ");
+ui_print("  + Burak D. for translation                      ");
+ui_print("  + ZJRDroid for translation                      ");
+ui_print("  + LayeardDevMod for translation                 ");
 ui_print("                                                  ");
-ui_print("epicX | Dni9 | Giovix92 | osmOsis | Teamwin | VR25");
-ui_print("                                                  ");
-ui_print("                                                  ");
-ui_print("Special thanks to,                                ");
-ui_print("--------------------------------------------------");
-ui_print("                                                  ");
-ui_print("Pritish joshi | Kirill | Others ");
-ui_print("                                                  ");
-ui_print("                                                  ");
-ui_print("Contact Us,                       ");
-ui_print("--------------------------------------------------");
-ui_print("Our Website- http://shrp.cf                       ");
-ui_print("Our Telegram Group- t.me/sky_hawk                 ");
-ui_print("YT Channel- youtube.com/epicspicy                 ");
+ui_print("Contact Us,");
+ui_print(" + Website- http://shrp.cf                        ");
+ui_print(" + Telegram Group - t.me/sky_hawk                 ");
+ui_print(" + Telegram Channel - t.me/shrp_official          ");
 set_progress(1.000000);
 ui_print("");
 EOF
