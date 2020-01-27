@@ -1464,15 +1464,6 @@ define build-recoveryramdisk
 ### SHRP - STARTING BUILD ###
 	echo '$(SHRP_MAINTAINER) ' > $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_DEVICE_CODE) ' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_EDL_MODE)' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_EXTERNAL)' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_INTERNAL)' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_OTG)' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_FLASH)' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_FLASH_MAX_BRIGHTNESS)' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_FONP_1)' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_FONP_2)' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_FONP_3)' >> $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_REC)' >> $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_AB) ' > $(TOPDIR)build/shrp/ab
   $(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/twres
