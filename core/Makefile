@@ -1469,7 +1469,6 @@ define build-recoveryramdisk
   $(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/twres
 	$(hide) bash $(SHRPSCRIPT)
   $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_portrait_hdpi $(TARGET_RECOVERY_ROOT_OUT)/twres
-	$(hide) cp $(TOPDIR)vendor/shrp/extras/magiskboot $(TARGET_RECOVERY_ROOT_OUT)/sbin/
 ### SHRP - END BUILD ###
 
 
