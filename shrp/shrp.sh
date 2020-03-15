@@ -56,6 +56,7 @@ ui_print("  + Kirill for translation                        ");
 ui_print("  + Burak D. for translation                      ");
 ui_print("  + ZJRDroid for translation                      ");
 ui_print("  + LayeardDevMod for translation                 ");
+ui_print("  + Olek & Oliwier for translation                ");
 ui_print("                                                  ");
 ui_print("Contact Us,");
 ui_print(" + Website- http://shrp.cf                        ");
