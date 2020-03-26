@@ -1466,9 +1466,7 @@ define build-recoveryramdisk
 	echo '$(SHRP_DEVICE_CODE) ' >> $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_REC)' >> $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_AB) ' > $(TOPDIR)build/shrp/ab
-  $(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/twres
 	$(hide) bash $(SHRPSCRIPT)
-  $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_portrait_hdpi $(TARGET_RECOVERY_ROOT_OUT)/twres
 ### SHRP - END BUILD ###
 
 

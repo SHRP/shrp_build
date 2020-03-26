@@ -31,7 +31,7 @@ cat > "${dir}"/build/shrp/update-binary-b <<EOF
 show_progress(1.000000, 0);
 ui_print("             ");
 ui_print("Skyhawk Recovery Project                     ");
-ui_print("|SHRP version - 2.2 Beta                     ");
+ui_print("|SHRP version - 2.2 Stable                   ");
 ui_print("|Device - $SHRP_DEVICE");
 ui_print("|Maintainer - $SHRP_MAINTAINER");
 delete_recursive("/sdcard/SHRP");
@@ -71,6 +71,8 @@ ui_print("  + osmOsis for various scripts                   ");
 ui_print("  + Teamwin for TWRP                              ");
 ui_print("  + Topjohnwu for Magisk                          ");
 ui_print("  + VR25 for Magisk mount scripts                 ");
+ui_print("  + Mauronofrio for TWRP Survival                 ");
+ui_print("  + DarthJabba9 for /data fix                     ");
 ui_print("  + Pritish joshi for translation                 ");
 ui_print("  + Kirill for translation                        ");
 ui_print("  + Burak D. for translation                      ");
