@@ -1,4 +1,5 @@
 export ALLOW_MISSING_DEPENDENCIES=true
+export SHRP_BUILD_DATE=$(date -u +%H%M%d%m%Y)
 function hmm() {
 cat <<EOF
 
