@@ -1469,6 +1469,7 @@ define build-recoveryramdisk
 	$(hide) cp $(TOPDIR)vendor/shrp/extras/magiskbootnt $(TARGET_RECOVERY_ROOT_OUT)/sbin/
 	$(hide) bash $(SHRPSCRIPT)
 	$(if $(filter true,$(SHRP_NOTCH)), $(if $(filter true,$(SHRP_DARK)), $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_dark_notch/* $(TARGET_RECOVERY_ROOT_OUT)/twres/ , $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_notch/* $(TARGET_RECOVERY_ROOT_OUT)/twres/ ),$(if $(filter true,$(SHRP_DARK)), $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_dark/* $(TARGET_RECOVERY_ROOT_OUT)/twres/))
+	$(if $(filter true,$(SHRP_ALT_REBOOT)), $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/extra-layouts/altPower/powerPanel.xml $(TARGET_RECOVERY_ROOT_OUT)/twres/)
 ### SHRP - END BUILD ###
 #$(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_notch/* $(TARGET_RECOVERY_ROOT_OUT)/twres/
 #$(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_dark/* $(TARGET_RECOVERY_ROOT_OUT)/twres/
