@@ -23,10 +23,20 @@ dir="$(pwd)"
 #
 SHRP_MAINTAINER=$(sed -n '1p' "$(pwd)/build/shrp/variables")
 SHRP_DEVICE=$(sed -n '2p' "$(pwd)/build/shrp/variables")
-SHRP_REC=$(sed -n '3p' "$(pwd)/build/shrp/variables")
+SHRP_OFFICIAL=$(sed -n '3p' "$(pwd)/build/shrp/variables")
+SHRP_EXPRESS=$(sed -n '4p' "$(pwd)/build/shrp/variables")
+SHRP_REC=$(sed -n '5p' "$(pwd)/build/shrp/variables")
 
-cat > "${dir}"/build/shrp/shrp_vital <<EOF
-ro.shrp.recovery.block=$SHRP_REC
+cat > "${dir}"/build/shrp/shrp_info.json <<EOF
+[
+	{
+	"codeName": "$SHRP_DEVICE",
+	"buildNo": "$SHRP_BUILD_DATE",
+	"isOfficial": $SHRP_OFFICIAL,
+  "has_express": $SHRP_EXPRESS,
+	"shrpVer": 2.3
+	}
+]
 EOF
 
 cat > "${dir}"/build/shrp/updater-script <<EOF

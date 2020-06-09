@@ -1464,6 +1464,8 @@ define build-recoveryramdisk
 ### SHRP - STARTING BUILD ###
 	echo '$(SHRP_MAINTAINER) ' > $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_DEVICE_CODE) ' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_OFFICIAL) ' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_EXPRESS) ' >> $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_REC)' >> $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_AB) ' > $(TOPDIR)build/shrp/ab
 	$(hide) cp $(TOPDIR)vendor/shrp/extras/magiskbootnt $(TARGET_RECOVERY_ROOT_OUT)/sbin/

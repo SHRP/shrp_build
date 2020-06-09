@@ -23,9 +23,23 @@ dir="$(pwd)"
 #
 SHRP_MAINTAINER=$(sed -n '1p' "$(pwd)/build/shrp/variables")
 SHRP_DEVICE=$(sed -n '2p' "$(pwd)/build/shrp/variables")
+SHRP_OFFICIAL=$(sed -n '3p' "$(pwd)/build/shrp/variables")
+SHRP_EXPRESS=$(sed -n '4p' "$(pwd)/build/shrp/variables")
 
 tool="/data/local/twrp-install/magiskboot"
 target="/data/local/twrp-install/boot.img"
+
+cat > "${dir}"/build/shrp/shrp_info.json <<EOF
+[
+	{
+	"codeName": "$SHRP_DEVICE",
+	"buildNo": "$SHRP_BUILD_DATE",
+	"isOfficial": $SHRP_OFFICIAL,
+  "has_express": $SHRP_EXPRESS,
+	"shrpVer": 2.3
+	}
+]
+EOF
 
 cat > "${dir}"/build/shrp/update-binary-b <<EOF
 show_progress(1.000000, 0);
