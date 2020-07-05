@@ -36,7 +36,7 @@ cat > "${dir}"/build/shrp/shrp_info.json <<EOF
 	"buildNo": "$SHRP_BUILD_DATE",
 	"isOfficial": $SHRP_OFFICIAL,
   "has_express": $SHRP_EXPRESS,
-	"shrpVer": 2.3.1
+	"shrpVer": "2.3.1"
 	}
 ]
 EOF
