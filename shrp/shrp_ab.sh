@@ -35,8 +35,8 @@ cat > "${dir}"/build/shrp/shrp_info.json <<EOF
 	"codeName": "$SHRP_DEVICE",
 	"buildNo": "$SHRP_BUILD_DATE",
 	"isOfficial": $SHRP_OFFICIAL,
-  "has_express": $SHRP_EXPRESS,
-	"shrpVer": "2.3.1"
+  	"has_express": $SHRP_EXPRESS,
+	"shrpVer": "2.3.2"
 	}
 ]
 EOF
@@ -45,7 +45,7 @@ cat > "${dir}"/build/shrp/update-binary-b <<EOF
 show_progress(1.000000, 0);
 ui_print("             ");
 ui_print("Skyhawk Recovery Project                     ");
-ui_print("|SHRP version - 2.3.1 Stable                   ");
+ui_print("|SHRP version - 2.3.2 Stable                   ");
 ui_print("|Device - $SHRP_DEVICE");
 ui_print("|Maintainer - $SHRP_MAINTAINER");
 delete_recursive("/sdcard/SHRP");
