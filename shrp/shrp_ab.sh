@@ -23,15 +23,29 @@ dir="$(pwd)"
 #
 SHRP_MAINTAINER=$(sed -n '1p' "$(pwd)/build/shrp/variables")
 SHRP_DEVICE=$(sed -n '2p' "$(pwd)/build/shrp/variables")
+SHRP_OFFICIAL=$(sed -n '3p' "$(pwd)/build/shrp/variables")
+SHRP_EXPRESS=$(sed -n '4p' "$(pwd)/build/shrp/variables")
 
 tool="/data/local/twrp-install/magiskboot"
 target="/data/local/twrp-install/boot.img"
+
+cat > "${dir}"/build/shrp/shrp_info.json <<EOF
+[
+	{
+	"codeName": "$SHRP_DEVICE",
+	"buildNo": "$SHRP_BUILD_DATE",
+	"isOfficial": $SHRP_OFFICIAL,
+  	"has_express": $SHRP_EXPRESS,
+	"shrpVer": "2.3.2"
+	}
+]
+EOF
 
 cat > "${dir}"/build/shrp/update-binary-b <<EOF
 show_progress(1.000000, 0);
 ui_print("             ");
 ui_print("Skyhawk Recovery Project                     ");
-ui_print("|SHRP version - 2.2 Stable                   ");
+ui_print("|SHRP version - 2.3.2 Stable                   ");
 ui_print("|Device - $SHRP_DEVICE");
 ui_print("|Maintainer - $SHRP_MAINTAINER");
 delete_recursive("/sdcard/SHRP");
@@ -66,21 +80,9 @@ set_progress(0.700000);
 ui_print("                                                  ");
 ui_print("Credits,                                          ");
 ui_print(" TeamSHRP - epicX | Dni9 | Giovix 92              ");
-ui_print(" Thanks to -                                      ");
-ui_print("  + osmOsis for various scripts                   ");
-ui_print("  + Teamwin for TWRP                              ");
-ui_print("  + Topjohnwu for Magisk                          ");
-ui_print("  + VR25 for Magisk mount scripts                 ");
-ui_print("  + Mauronofrio for TWRP Survival                 ");
-ui_print("  + DarthJabba9 for /data fix                     ");
-ui_print("  + Pritish joshi for translation                 ");
-ui_print("  + Kirill for translation                        ");
-ui_print("  + Burak D. for translation                      ");
-ui_print("  + ZJRDroid for translation                      ");
-ui_print("  + LayeardDevMod for translation                 ");
 ui_print("                                                  ");
 ui_print("Contact Us,");
-ui_print(" + Website- http://shrp.cf                        ");
+ui_print(" + Website- http://shrp.team                        ");
 ui_print(" + Telegram Group - t.me/sky_hawk                 ");
 ui_print(" + Telegram Channel - t.me/shrp_official          ");
 set_progress(1.000000);

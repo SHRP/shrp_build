@@ -1464,8 +1464,11 @@ define build-recoveryramdisk
 ### SHRP - STARTING BUILD ###
 	echo '$(SHRP_MAINTAINER) ' > $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_DEVICE_CODE) ' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_OFFICIAL) ' >> $(TOPDIR)build/shrp/variables
+	echo '$(SHRP_EXPRESS) ' >> $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_REC)' >> $(TOPDIR)build/shrp/variables
 	echo '$(SHRP_AB) ' > $(TOPDIR)build/shrp/ab
+	echo '$(SHRP_BUILD_DATE) ' > $(TARGET_RECOVERY_ROOT_OUT)/twres/version
 	$(hide) cp $(TOPDIR)vendor/shrp/extras/magiskbootnt $(TARGET_RECOVERY_ROOT_OUT)/sbin/
 	$(hide) bash $(SHRPSCRIPT)
 	$(if $(filter true,$(SHRP_NOTCH)), $(if $(filter true,$(SHRP_DARK)), $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_dark_notch/* $(TARGET_RECOVERY_ROOT_OUT)/twres/ , $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_notch/* $(TARGET_RECOVERY_ROOT_OUT)/twres/ ),$(if $(filter true,$(SHRP_DARK)), $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_dark/* $(TARGET_RECOVERY_ROOT_OUT)/twres/))
