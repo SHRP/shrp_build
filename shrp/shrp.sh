@@ -33,7 +33,7 @@ cat > "${dir}"/build/shrp/shrp_info.json <<EOF
 	"codeName": "$SHRP_DEVICE",
 	"buildNo": "$SHRP_BUILD_DATE",
 	"isOfficial": $SHRP_OFFICIAL,
-  	"has_express": $SHRP_EXPRESS,
+  "has_express": $SHRP_EXPRESS,
 	"shrpVer": "2.3.2"
 	}
 ]
@@ -43,7 +43,7 @@ cat > "${dir}"/build/shrp/updater-script <<EOF
 show_progress(1.000000, 0);
 ui_print("             ");
 ui_print("Skyhawk Recovery Project                  ");
-ui_print("|SHRP version - 2.3.2 Stable                ");
+ui_print("|SHRP version - 2.3.2 beta                ");
 ui_print("|Device - $SHRP_DEVICE");
 ui_print("|Maintainer - $SHRP_MAINTAINER");
 delete_recursive("/sdcard/SHRP");
@@ -53,7 +53,7 @@ package_extract_file("recovery.img", "$SHRP_REC");
 set_progress(0.700000);
 ui_print("                                                  ");
 ui_print("Contact Us,");
-ui_print(" + Website- http://shrp.team                        ");
+ui_print(" + Website- http://shrp.team                      ");
 ui_print(" + Telegram Group - t.me/sky_hawk                 ");
 ui_print(" + Telegram Channel - t.me/shrp_official          ");
 set_progress(1.000000);
