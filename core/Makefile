@@ -15,6 +15,7 @@ SHELL_EXPORT := $(foreach v,$(MAKE_ENV),$(v)='$($(v))')
 # src:dest pair is the first one to match the same dest"
 #$(1): the src:dest pair
 #$(2): the dest
+###SHRP###
 ifneq ($(BUILD_WITH_COLORS),0)
   CL_RED="\033[31m"
   CL_GRN="\033[32m"
@@ -24,6 +25,8 @@ ifneq ($(BUILD_WITH_COLORS),0)
   CL_CYN="\033[36m"
   CL_RST="\033[0m"
 endif
+###/SHRP###
+
 define check-product-copy-files
 $(if $(filter-out $(TARGET_COPY_OUT_SYSTEM_OTHER)/%,$(2)), \
   $(if $(filter %.apk, $(2)),$(error \
@@ -1397,11 +1400,6 @@ ifeq ($(strip $(BOARD_KERNEL_SEPARATED_DT)),true)
   RECOVERYIMAGE_EXTRA_DEPS    := $(INSTALLED_DTIMAGE_TARGET)
 endif
 
-SHRPSCRIPT := $(TOPDIR)build/shrp/shrp.sh
-ifeq ($(SHRP_AB),true)
-  SHRPSCRIPT := $(TOPDIR)build/shrp/shrp_ab.sh
-endif
-
 # Keys authorized to sign OTA packages this build will accept.  The
 # build always uses dev-keys for this; release packaging tools will
 # substitute other keys for this one.
@@ -1462,23 +1460,8 @@ define build-recoveryramdisk
 
 
 ### SHRP - STARTING BUILD ###
-	echo '$(SHRP_MAINTAINER) ' > $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_DEVICE_CODE) ' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_OFFICIAL) ' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_EXPRESS) ' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_REC)' >> $(TOPDIR)build/shrp/variables
-	echo '$(SHRP_AB) ' > $(TOPDIR)build/shrp/ab
-	echo '$(SHRP_BUILD_DATE) ' > $(TARGET_RECOVERY_ROOT_OUT)/twres/version
-	$(hide) cp $(TOPDIR)vendor/shrp/extras/magiskbootnt $(TARGET_RECOVERY_ROOT_OUT)/sbin/
-	$(hide) bash $(SHRPSCRIPT)
-	$(if $(filter true,$(SHRP_NOTCH)), $(if $(filter true,$(SHRP_DARK)), $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_dark_notch/* $(TARGET_RECOVERY_ROOT_OUT)/twres/ , $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_notch/* $(TARGET_RECOVERY_ROOT_OUT)/twres/ ),$(if $(filter true,$(SHRP_DARK)), $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_dark/* $(TARGET_RECOVERY_ROOT_OUT)/twres/))
-	$(if $(filter true,$(SHRP_ALT_REBOOT)), $(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/extra-layouts/altPower/powerPanel.xml $(TARGET_RECOVERY_ROOT_OUT)/twres/)
+	$(hide) bash $(TOPDIR)build/shrp/shrp.sh
 ### SHRP - END BUILD ###
-#$(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_notch/* $(TARGET_RECOVERY_ROOT_OUT)/twres/
-#$(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_dark/* $(TARGET_RECOVERY_ROOT_OUT)/twres/
-#$(hide) cp -r $(TOPDIR)bootable/recovery/gui/theme/shrp_dark_notch/* $(TARGET_RECOVERY_ROOT_OUT)/twres/
-
-
   $(BOARD_RECOVERY_IMAGE_PREPARE)
   $(if $(filter true,$(BOARD_BUILD_SYSTEM_ROOT_IMAGE)), \
     $(hide) mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/system_root; \
@@ -1586,18 +1569,9 @@ endif
 
 .PHONY: recoveryimage
 recoveryimage: $(INSTALLED_RECOVERYIMAGE_TARGET) $(RECOVERY_RESOURCE_ZIP)
-	$(BASH) $(SHRP_SCRIPT)
-	@echo -e ${CL_CYN} ""
-	@echo -e ${CL_CYN} "                                            _ _ __"
-	@echo -e ${CL_CYN} "   __ __ __  _ __ _  __ _            __   /_ _   /"
-	@echo -e ${CL_CYN} "  / _ _// / / / __ \/ __ \   __     / /   _ __/ / "
-	@echo -e ${CL_CYN} "  \__ \/ /_/ / /_/ / /_/ /   \ \   / /  / _ _ _/  "
-	@echo -e ${CL_CYN} " ___/ / __  / _, _/ ____/     \ \_/ /  / /_ _     "
-	@echo -e ${CL_CYN} "/__ _/_/ /_/_/ |_/_/           \__ /  /__ __/     "
-	@echo -e ${CL_CYN} ""
-	@echo -e ${CL_CYN} ""
-	@echo -e ${CL_CYN} "" ${CL_CYN}
-	@echo -e ${CL_GRN} "-----------SHRP Recovery Build Complete-----------"${CL_GRN}
+###SHRP###
+	bash vendor/shrp/shrp_final.sh
+###SHRP###
 
 ifneq ($(BOARD_NAND_PAGE_SIZE),)
 $(error MTD device is no longer supported and thus BOARD_NAND_PAGE_SIZE is deprecated.)
