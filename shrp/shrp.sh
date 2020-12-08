@@ -55,5 +55,5 @@ cp -r "${dir}"/bootable/recovery/gui/theme/shrp_dark/* $REC_OUT/twres/
 fi;
 
 if [[ $SHRP_ALT_REBOOT = true ]]; then
-cp -r "${dir}"/bootable/recovery/gui/theme/extra-layouts/altPower/powerPanel.xml $REC_OUT/twres/
+cp -r "${dir}"/bootable/recovery/gui/theme/extra-layouts/altPower/* $REC_OUT/twres/
 fi;
