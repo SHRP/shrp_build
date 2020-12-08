@@ -242,7 +242,7 @@ target="/data/local/twrp-install/boot.img"
 REC_OUT=$(get_build_var TARGET_RECOVERY_ROOT_OUT)
 EAP=$(get_build_var SHRP_EXTERNAL_ADDON_PATH)
 
-SHRP_VERSION=2.3.2
+SHRP_VERSION=3.69
 SHRP_STATUS=beta
 
 
