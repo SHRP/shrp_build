@@ -51,6 +51,10 @@ if [[ $SHRP_DARK = true ]]; then
 cp -r "${dir}"/bootable/recovery/gui/theme/shrp_dark/* $REC_OUT/twres/
 fi;
 
+if [[ $SHRP_LITE = true ]]; then
+rm -rf $REC_OUT/twres/themeResources
+fi;
+
 if [[ $SHRP_ALT_REBOOT = true ]]; then
 cp -r "${dir}"/bootable/recovery/gui/theme/extra-layouts/altPower/* $REC_OUT/twres/
 fi;
