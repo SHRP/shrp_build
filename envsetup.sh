@@ -1621,6 +1621,16 @@ function source_vendorsetup() {
     done
 }
 
+#SHRP PY Addition
+function shrp()
+{
+    python3 $(gettop)/build/shrp/shrp.py
+}
+function SHRP()
+{
+    python3 $(gettop)/build/shrp/shrp.py
+}
+
 validate_current_shell
 source_vendorsetup
 addcompletions
