@@ -32,6 +32,9 @@ addDefaultAddonPre $(normalizeVar $(get_build_var INC_IN_REC_ADDON_1)) $DEFAULT_
 addDefaultAddonPre $(normalizeVar $(get_build_var INC_IN_REC_ADDON_2)) $DEFAULT_ADDON_LOC/s_non_oms.zip $(normalizeVar $(get_build_var SHRP_SKIP_DEFAULT_ADDON_2)) $(normalizeVar $(get_build_var SHRP_EXCLUDE_DEFAULT_ADDONS))
 addDefaultAddonPre $(normalizeVar $(get_build_var INC_IN_REC_ADDON_3)) $DEFAULT_ADDON_LOC/rfp.zip $(normalizeVar $(get_build_var SHRP_SKIP_DEFAULT_ADDON_3)) $(normalizeVar $(get_build_var SHRP_EXCLUDE_DEFAULT_ADDONS))
 addDefaultAddonPre $(normalizeVar $(get_build_var INC_IN_REC_ADDON_4)) $DEFAULT_ADDON_LOC/Disable_Dm-Verity_ForceEncrypt.zip $(normalizeVar $(get_build_var SHRP_SKIP_DEFAULT_ADDON_4)) $(normalizeVar $(get_build_var SHRP_EXCLUDE_DEFAULT_ADDONS))
+
+addDefaultAddonPre $(normalizeVar $(get_build_var INC_IN_REC_MAGISK)) $DEFAULT_ADDON_LOC/c_magisk.zip false false
+addDefaultAddonPre $(normalizeVar $(get_build_var INC_IN_REC_MAGISK)) $DEFAULT_ADDON_LOC/unmagisk.zip false false
 #handle External Addons
 addAddonPre $(normalizeVar $(get_build_var SHRP_INC_IN_REC_EXTERNAL_ADDON_1)) $(get_addon_confirm ${dir}/$EAP$(get_build_var SHRP_EXTERNAL_ADDON_1_FILENAME)) $(addon_skip ${dir}/$EAP$(get_build_var SHRP_EXTERNAL_ADDON_1_FILENAME))
 addAddonPre $(normalizeVar $(get_build_var SHRP_INC_IN_REC_EXTERNAL_ADDON_2)) $(get_addon_confirm ${dir}/$EAP$(get_build_var SHRP_EXTERNAL_ADDON_2_FILENAME)) $(addon_skip ${dir}/$EAP$(get_build_var SHRP_EXTERNAL_ADDON_2_FILENAME))
