@@ -1215,7 +1215,6 @@ endef
 APEX_MODULE_LIBS := \
   libadbconnection.so \
   libadbconnectiond.so \
-  libandroidicu.so \
   libandroidio.so \
   libart-compiler.so \
   libart-dexlayout.so \
@@ -1235,8 +1234,6 @@ APEX_MODULE_LIBS := \
   libdl.so \
   libdt_fd_forward.so \
   libdt_socket.so \
-  libicui18n.so \
-  libicuuc.so \
   libjavacore.so \
   libjdwp.so \
   libm.so \
