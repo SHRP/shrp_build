@@ -14,6 +14,37 @@ LOCAL_PATH := $(BUILD_SYSTEM)
 #$(1): the src:dest pair
 #$(2): the dest
 ###SHRP###
+SHRP_BUILD_VARS := \
+	"$(DATE_FROM_FILE),\
+	$(SHRP_MAINTAINER),\
+	$(SHRP_DEVICE_CODE),\
+	$(SHRP_OFFICIAL),\
+	$(SHRP_EXPRESS),\
+	$(SHRP_DARK),\
+	$(SHRP_ALT_REBOOT),\
+	$(SHRP_REC),\
+	$(SHRP_AB),\
+	$(TARGET_RECOVERY_ROOT_OUT),\
+	$(SHRP_EXTERNAL_ADDON_PATH),\
+	$(SHRP_EXCLUDE_DEFAULT_ADDONS),\
+	$(SHRP_SKIP_DEFAULT_ADDON_1),\
+	$(SHRP_SKIP_DEFAULT_ADDON_2),\
+	$(SHRP_SKIP_DEFAULT_ADDON_3),\
+	$(SHRP_SKIP_DEFAULT_ADDON_4),\
+	$(SHRP_EXTERNAL_ADDON_1_FILENAME),\
+	$(SHRP_EXTERNAL_ADDON_2_FILENAME),\
+	$(SHRP_EXTERNAL_ADDON_3_FILENAME),\
+	$(SHRP_EXTERNAL_ADDON_4_FILENAME),\
+	$(SHRP_EXTERNAL_ADDON_5_FILENAME),\
+	$(SHRP_EXTERNAL_ADDON_6_FILENAME),\
+	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_1),\
+	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_2),\
+	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_3),\
+	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_4),\
+	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_5),\
+	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_6),\
+	$(INC_IN_REC_MAGISK)"
+
 ifneq ($(BUILD_WITH_COLORS),0)
   CL_RED="\033[31m"
   CL_GRN="\033[32m"
@@ -1970,7 +2001,7 @@ define build-recoveryramdisk
   $(hide) cp $(RECOVERY_INSTALL_OTA_KEYS) $(TARGET_RECOVERY_ROOT_OUT)/system/etc/security/otacerts.zip
   $(hide) ln -sf prop.default $(TARGET_RECOVERY_ROOT_OUT)/default.prop
 ### SHRP - STARTING BUILD ###
-  $(hide) bash $(TOPDIR)build/shrp/shrp.sh
+   $(hide) bash $(TOPDIR)build/shrp/shrp.sh "$(SHRP_BUILD_VARS)"
 ### SHRP - END BUILD ###
   $(BOARD_RECOVERY_IMAGE_PREPARE)
 endef
@@ -2104,7 +2135,7 @@ endif
 .PHONY: recoveryimage
 recoveryimage: $(INSTALLED_RECOVERYIMAGE_TARGET) $(RECOVERY_RESOURCE_ZIP)
 ###SHRP###
-	bash vendor/shrp/shrp_final.sh
+	$(hide) bash vendor/shrp/shrp_final.sh "$(SHRP_BUILD_VARS)"
 ###SHRP###
 
 ifneq ($(BOARD_NAND_PAGE_SIZE),)
