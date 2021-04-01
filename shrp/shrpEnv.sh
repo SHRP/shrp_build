@@ -15,6 +15,11 @@
 #limitations under the License.
 ##########################################################################
 
+# DEBUG ONLY
+#echo "called with these args: $@"
+
+ARGS=$(echo "$@"|tr -d " ")
+
 #kanged from envsetup.sh
 function gettop
 {
@@ -56,7 +61,7 @@ function get_build_var()
         echo "Couldn't locate the top of the tree.  Try setting TOP." >&2
         return
     fi
-    (\cd $T; build/soong/soong_ui.bash --dumpvar-mode $1)
+    echo "${!1}"
 }
 #check official or not
 function o_or_not()
@@ -226,28 +231,47 @@ function getSize()
 }
 
 #COMMON VARS
-SHRP_BUILD_DATE=$(get_build_var SHRP_BUILD_DATE)
-SHRP_MAINTAINER=$(get_build_var SHRP_MAINTAINER)
-SHRP_DEVICE=$(get_build_var SHRP_DEVICE_CODE)
-SHRP_OFFICIAL=$(get_build_var SHRP_OFFICIAL)
-SHRP_EXPRESS=$(get_build_var SHRP_EXPRESS)
-SHRP_DARK=$(get_build_var SHRP_DARK)
-SHRP_ALT_REBOOT=$(get_build_var SHRP_ALT_REBOOT)
+SHRP_BUILD_DATE_F=$(echo "$ARGS" | cut -d "," -f 1)
+SHRP_BUILD_DATE="${SHRP_BUILD_DATE_F/*@/}"
+SHRP_MAINTAINER=$(echo "$ARGS" | cut -d "," -f 2)
+SHRP_DEVICE=$(echo "$ARGS" | cut -d "," -f 3)
+SHRP_OFFICIAL=$(echo "$ARGS" | cut -d "," -f 4)
+SHRP_EXPRESS=$(echo "$ARGS" | cut -d "," -f 5)
+SHRP_DARK=$(echo "$ARGS" | cut -d "," -f 6)
+SHRP_ALT_REBOOT=$(echo "$ARGS" | cut -d "," -f 7)
 IS_OFFICIAL=$(o_or_not $SHRP_OFFICIAL $SHRP_DEVICE)
 
-SHRP_REC=$(get_build_var SHRP_REC)
-SHRP_AB=$(get_build_var SHRP_AB)
+SHRP_REC=$(echo "$ARGS" | cut -d "," -f 8)
+SHRP_AB=$(echo "$ARGS" | cut -d "," -f 9)
 tool="/data/local/twrp-install/magiskboot"
 target="/data/local/twrp-install/boot.img"
-REC_OUT=$(get_build_var TARGET_RECOVERY_ROOT_OUT)
-EAP=$(get_build_var SHRP_EXTERNAL_ADDON_PATH)
+REC_OUT=$(echo "$ARGS" | cut -d "," -f 10)
+EAP=$(echo "$ARGS" | cut -d "," -f 11)
+
+SHRP_EXCLUDE_DEFAULT_ADDONS=$(echo "$ARGS" | cut -d "," -f 12)
+SHRP_SKIP_DEFAULT_ADDON_1=$(echo "$ARGS" | cut -d "," -f 13)
+SHRP_SKIP_DEFAULT_ADDON_2=$(echo "$ARGS" | cut -d "," -f 14)
+SHRP_SKIP_DEFAULT_ADDON_3=$(echo "$ARGS" | cut -d "," -f 15)
+SHRP_SKIP_DEFAULT_ADDON_4=$(echo "$ARGS" | cut -d "," -f 16)
+SHRP_EXTERNAL_ADDON_1_FILENAME=$(echo "$ARGS" | cut -d "," -f 17)
+SHRP_EXTERNAL_ADDON_2_FILENAME=$(echo "$ARGS" | cut -d "," -f 18)
+SHRP_EXTERNAL_ADDON_3_FILENAME=$(echo "$ARGS" | cut -d "," -f 19)
+SHRP_EXTERNAL_ADDON_4_FILENAME=$(echo "$ARGS" | cut -d "," -f 20)
+SHRP_EXTERNAL_ADDON_5_FILENAME=$(echo "$ARGS" | cut -d "," -f 21)
+SHRP_EXTERNAL_ADDON_6_FILENAME=$(echo "$ARGS" | cut -d "," -f 22)
+SHRP_INC_IN_REC_EXTERNAL_ADDON_1=$(echo "$ARGS" | cut -d "," -f 23)
+SHRP_INC_IN_REC_EXTERNAL_ADDON_2=$(echo "$ARGS" | cut -d "," -f 24)
+SHRP_INC_IN_REC_EXTERNAL_ADDON_3=$(echo "$ARGS" | cut -d "," -f 25)
+SHRP_INC_IN_REC_EXTERNAL_ADDON_4=$(echo "$ARGS" | cut -d "," -f 26)
+SHRP_INC_IN_REC_EXTERNAL_ADDON_5=$(echo "$ARGS" | cut -d "," -f 27)
+SHRP_INC_IN_REC_EXTERNAL_ADDON_6=$(echo "$ARGS" | cut -d "," -f 28)
+INC_IN_REC_MAGISK=$(echo "$ARGS" | cut -d "," -f 29)
 
 SHRP_VERSION=3.1
 SHRP_STATUS=Alpha
 
-
 SHRP_VENDOR=vendor/shrp
-MAGISKBOOT=$SHRP_VENDOR/extras/magiskboot
+MAGISKBOOT=$SHRP_VENDOR/magiskboot/magiskboot
 SHRP_BUILD=build/make/shrp
 SHRP_OUT=$OUT
 SHRP_WORK_DIR=$OUT/zip
