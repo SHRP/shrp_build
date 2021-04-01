@@ -19,8 +19,11 @@
 #
 dir="$(pwd)"
 
+# DEBUG ONLY
+#echo "$0 called with these args: $@"
+
 #initializing helper function
-. "${dir}"/build/shrp/shrpEnv.sh
+. "${dir}"/build/shrp/shrpEnv.sh "$@"
 
 #
 # Run shrp env variables from here
