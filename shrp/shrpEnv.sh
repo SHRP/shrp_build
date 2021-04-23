@@ -63,49 +63,6 @@ function get_build_var()
     fi
     echo "${!1}"
 }
-#check official or not
-function o_or_not()
-{
-oc=false
-hello=$(curl -s https://raw.githubusercontent.com/SHRP-Devices/device_data/master/devices.raw)
-IFS=','
-read -a arr <<< "$hello"
-
-for val in "${arr[@]}" 
-do
-    if [[ $val = $2 ]]; then
-        oc=true
-        break
-    fi
-done
-if [[ $1 = $oc ]]; then
-echo true
-else
-echo false
-fi;
-}
-
-#check official or not
-#function o_or_not()
-# {
-#oc=false
-#hello=$(curl -s https://raw.githubusercontent.com/SHRP-Devices/device_data/master/devices)
-#IFS=$'\n';
-#devices=($hello);
-#
-#for device in "${devices[@]}" 
-#do
-#    if [[ $device = $2 ]]; then
-#        oc=true
-#        break
-#    fi
-#done
-#if [[ $1 = $oc ]]; then
-#echo true
-#else
-#echo false
-#fi;
-#}
 
 #Delete and create the folder
 function resetFolder()
@@ -239,7 +196,6 @@ SHRP_OFFICIAL=$(echo "$ARGS" | cut -d "," -f 4)
 SHRP_EXPRESS=$(echo "$ARGS" | cut -d "," -f 5)
 SHRP_DARK=$(echo "$ARGS" | cut -d "," -f 6)
 SHRP_ALT_REBOOT=$(echo "$ARGS" | cut -d "," -f 7)
-IS_OFFICIAL=$(o_or_not $SHRP_OFFICIAL $SHRP_DEVICE)
 
 SHRP_REC=$(echo "$ARGS" | cut -d "," -f 8)
 SHRP_AB=$(echo "$ARGS" | cut -d "," -f 9)
@@ -266,6 +222,8 @@ SHRP_INC_IN_REC_EXTERNAL_ADDON_4=$(echo "$ARGS" | cut -d "," -f 26)
 SHRP_INC_IN_REC_EXTERNAL_ADDON_5=$(echo "$ARGS" | cut -d "," -f 27)
 SHRP_INC_IN_REC_EXTERNAL_ADDON_6=$(echo "$ARGS" | cut -d "," -f 28)
 INC_IN_REC_MAGISK=$(echo "$ARGS" | cut -d "," -f 29)
+SHRP_HAS_RECOVERY_PARTITION=$(echo "$ARGS" | cut -d "," -f 30)
+IS_OFFICIAL=$(echo "$ARGS" | cut -d "," -f 31)
 
 SHRP_VERSION=3.1
 SHRP_STATUS=Alpha
@@ -279,7 +237,7 @@ SHRP_META_DATA_DIR=$OUT/zip/META-INF
 RECOVERY_IMG=$OUT/recovery.img
 RECOVERY_RAM=$OUT/ramdisk-recovery.cpio
 
-if $IS_OFFICIAL; then
+if [ "$IS_OFFICIAL" == "1" ]; then
     XSTATUS=Official
 else
     XSTATUS=Unofficial
