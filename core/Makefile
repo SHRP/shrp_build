@@ -7,15 +7,7 @@ MAKE_ENV := $(shell echo '$(.VARIABLES)' | awk -v RS=' ' '/^[a-zA-Z0-9_]+$$/')
 SHELL_EXPORT := $(foreach v,$(MAKE_ENV),$(v)='$($(v))')
 
 # -----------------------------------------------------------------
-# Define rules to copy PRODUCT_COPY_FILES defined by the product.
-# PRODUCT_COPY_FILES contains words like <source file>:<dest file>[:<owner>].
-# <dest file> is relative to $(PRODUCT_OUT), so it should look like,
-# e.g., "system/etc/file.xml".
-# The filter part means "only eval the copy-one-file rule if this
-# src:dest pair is the first one to match the same dest"
-#$(1): the src:dest pair
-#$(2): the dest
-###SHRP###
+# SHRP
 SHRP_BUILD_VARS := \
 	"$(DATE_FROM_FILE),\
 	$(SHRP_MAINTAINER),\
@@ -45,7 +37,9 @@ SHRP_BUILD_VARS := \
 	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_4),\
 	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_5),\
 	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_6),\
-	$(INC_IN_REC_MAGISK)"
+	$(INC_IN_REC_MAGISK),\
+	$(TW_HAS_RECOVERY_PARTITION),\
+	$(IS_OFFICIAL)"
 
 ifneq ($(BUILD_WITH_COLORS),0)
   CL_RED="\033[31m"
@@ -58,6 +52,15 @@ ifneq ($(BUILD_WITH_COLORS),0)
 endif
 ###/SHRP###
 
+# -----------------------------------------------------------------
+# Define rules to copy PRODUCT_COPY_FILES defined by the product.
+# PRODUCT_COPY_FILES contains words like <source file>:<dest file>[:<owner>].
+# <dest file> is relative to $(PRODUCT_OUT), so it should look like,
+# e.g., "system/etc/file.xml".
+# The filter part means "only eval the copy-one-file rule if this
+# src:dest pair is the first one to match the same dest"
+#$(1): the src:dest pair
+#$(2): the dest
 define check-product-copy-files
 $(if $(filter-out $(TARGET_COPY_OUT_SYSTEM_OTHER)/%,$(2)), \
   $(if $(filter %.apk, $(2)),$(error \
