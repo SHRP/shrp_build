@@ -224,6 +224,10 @@ SHRP_INC_IN_REC_EXTERNAL_ADDON_6=$(echo "$ARGS" | cut -d "," -f 28)
 INC_IN_REC_MAGISK=$(echo "$ARGS" | cut -d "," -f 29)
 SHRP_HAS_RECOVERY_PARTITION=$(echo "$ARGS" | cut -d "," -f 30)
 IS_OFFICIAL=$(echo "$ARGS" | cut -d "," -f 31)
+INC_IN_REC_ADDON_1=$(echo "$ARGS" | cut -d "," -f 32)
+INC_IN_REC_ADDON_2=$(echo "$ARGS" | cut -d "," -f 33)
+INC_IN_REC_ADDON_3=$(echo "$ARGS" | cut -d "," -f 34)
+INC_IN_REC_ADDON_4=$(echo "$ARGS" | cut -d "," -f 35)
 
 SHRP_VERSION=3.1
 SHRP_STATUS=stable
