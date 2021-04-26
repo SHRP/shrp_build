@@ -241,7 +241,7 @@ SHRP_META_DATA_DIR=$OUT/zip/META-INF
 RECOVERY_IMG=$OUT/recovery.img
 RECOVERY_RAM=$OUT/ramdisk-recovery.cpio
 
-if [ "$IS_OFFICIAL" == "1" ]; then
+if [ "$IS_OFFICIAL" == "1" ] && [ "$SHRP_OFFICIAL" == "true" ]; then
     XSTATUS=Official
 else
     XSTATUS=Unofficial
