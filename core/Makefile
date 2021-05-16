@@ -1154,6 +1154,10 @@ ifeq ($(BOARD_RAMDISK_USE_LZ4),true)
 COMPRESSION_COMMAND_DEPS := $(LZ4)
 COMPRESSION_COMMAND := $(LZ4) -l -12 --favor-decSpeed
 RAMDISK_EXT := .lz4
+else ifeq ($(BOARD_RAMDISK_USE_LZMA),true)
+COMPRESSION_COMMAND_DEPS := $(LZMA)
+COMPRESSION_COMMAND := $(LZMA) -f -c
+RAMDISK_EXT := .lz
 else
 COMPRESSION_COMMAND_DEPS := $(MINIGZIP)
 COMPRESSION_COMMAND := $(MINIGZIP)
@@ -4272,6 +4276,9 @@ else
 endif
 ifeq ($(BOARD_RAMDISK_USE_LZ4),true)
 	echo "lz4_ramdisks=true" >> $@
+endif
+ifeq ($(BOARD_RAMDISK_USE_LZMA),true)
+	echo "lzma_ramdisks=true" >> $@
 endif
 ifneq ($(INSTALLED_VENDOR_BOOTIMAGE_TARGET),)
 	echo "vendor_boot=true" >> $@
