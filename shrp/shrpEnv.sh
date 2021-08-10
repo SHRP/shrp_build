@@ -228,9 +228,10 @@ INC_IN_REC_ADDON_1=$(echo "$ARGS" | cut -d "," -f 32)
 INC_IN_REC_ADDON_2=$(echo "$ARGS" | cut -d "," -f 33)
 INC_IN_REC_ADDON_3=$(echo "$ARGS" | cut -d "," -f 34)
 INC_IN_REC_ADDON_4=$(echo "$ARGS" | cut -d "," -f 35)
+SHRP_LITE=$(echo "$ARGS" | cut -d "," -f 36)
 
 SHRP_VERSION=3.1
-SHRP_STATUS=Alpha
+SHRP_STATUS=stable
 
 SHRP_VENDOR=vendor/shrp
 MAGISKBOOT=$SHRP_VENDOR/magiskboot/magiskboot
@@ -241,7 +242,7 @@ SHRP_META_DATA_DIR=$OUT/zip/META-INF
 RECOVERY_IMG=$OUT/recovery.img
 RECOVERY_RAM=$OUT/ramdisk-recovery.cpio
 
-if [ "$IS_OFFICIAL" == "1" ]; then
+if [ "$IS_OFFICIAL" == "1" ] && [ "$SHRP_OFFICIAL" == "true" ]; then
     XSTATUS=Official
 else
     XSTATUS=Unofficial

@@ -659,13 +659,13 @@ function lunch()
         # if we can't find the product, try to grab it from our github
         T=$(gettop)
         pushd $T > /dev/null
-        vendor/twrp/build/tools/roomservice.py $product
+        vendor/shrp/build/tools/roomservice.py $product
         popd > /dev/null
         check_product $product
     else
         T=$(gettop)
         pushd $T > /dev/null
-        vendor/twrp/build/tools/roomservice.py $product true
+        vendor/shrp/build/tools/roomservice.py $product true
         popd > /dev/null
     fi
     if [ $? -ne 0 ]
@@ -1636,17 +1636,6 @@ function SHRP()
 validate_current_shell
 source_vendorsetup
 addcompletions
-
-# check and set ccache path on envsetup
-if [ -z ${CCACHE_EXEC} ]; then
-    ccache_path=$(which ccache)
-    if [ ! -z "$ccache_path" ]; then
-        export CCACHE_EXEC="$ccache_path"
-        echo "ccache found and CCACHE_EXEC has been set to : $ccache_path"
-    else
-        echo "ccache not found/installed!"
-    fi
-fi
 
 export ANDROID_BUILD_TOP=$(gettop)
 
