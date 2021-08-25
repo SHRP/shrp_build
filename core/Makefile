@@ -2297,7 +2297,7 @@ $(recovery_ramdisk): $(MKBOOTFS) $(COMPRESSION_COMMAND_DEPS) \
 	cd $(TARGET_RECOVERY_ROOT_OUT) && touch ramdisk-files.txt && find . | sed "s/.\///" > ramdisk-files.txt
 
 ### SHRP - STARTING BUILD ###
-   $(hide) bash $(TOPDIR)build/shrp/shrp.sh "$(SHRP_BUILD_VARS)"
+   $(hide) bash $(TOPDIR)build/make/shrp/shrp.sh "$(SHRP_BUILD_VARS)"
 ### SHRP - END BUILD ###
 	$(BOARD_RECOVERY_IMAGE_PREPARE)
 	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RECOVERY_ROOT_OUT) | $(COMPRESSION_COMMAND) > $(recovery_ramdisk)
