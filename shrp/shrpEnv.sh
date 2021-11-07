@@ -19,6 +19,8 @@
 #echo "called with these args: $@"
 
 ARGS=$(echo "$@"|tr -d " ")
+STMP=$(echo "$ARGS" | cut -d "," -f 10)
+OUT=${STMP::-14}
 
 #kanged from envsetup.sh
 function gettop
