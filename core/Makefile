@@ -1496,6 +1496,7 @@ define build-recoveryramdisk
   $(hide) cat $(recovery_build_props) \
           >> $(TARGET_RECOVERY_ROOT_OUT)/prop.default
   $(hide) ln -sf prop.default $(TARGET_RECOVERY_ROOT_OUT)/default.prop
+  $(hide) cd $(TARGET_RECOVERY_ROOT_OUT) && touch ramdisk-files.txt && find . | sed "s/.\///" > ramdisk-files.txt
 
 
 ### SHRP - STARTING BUILD ###
