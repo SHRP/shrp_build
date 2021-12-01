@@ -1496,7 +1496,8 @@ define build-recoveryramdisk
   $(hide) cat $(recovery_build_props) \
           >> $(TARGET_RECOVERY_ROOT_OUT)/prop.default
   $(hide) ln -sf prop.default $(TARGET_RECOVERY_ROOT_OUT)/default.prop
-  $(hide) cd $(TARGET_RECOVERY_ROOT_OUT) && touch ramdisk-files.txt && find . | sed "s/.\///" > ramdisk-files.txt
+  $(hide) cd $(TARGET_RECOVERY_ROOT_OUT) && touch ramdisk-files.txt && touch ramdisk-files.sha256sum && find . | sed "s/.\///" | sed "/lib\/modules\//d" > ramdisk-files.txt
+  $(hide) cd $(TARGET_RECOVERY_ROOT_OUT) && find -type f | sed "s/.\/ramdisk-files.sha256sum//" | sed "/lib\/modules/d" | sed "/prop.default/d" | sed "/-timestamp/d" | xargs sha256sum > ramdisk-files.sha256sum
 
 
 ### SHRP - STARTING BUILD ###
