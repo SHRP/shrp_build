@@ -1,3 +1,5 @@
+export ALLOW_MISSING_DEPENDENCIES=true
+export SHRP_BUILD_DATE=$(date -u +%H%M%d%m%Y)
 function hmm() {
 cat <<EOF
 
@@ -701,13 +703,13 @@ function lunch()
         # if we can't find a product, try to grab it off the TeamWin GitHub
         T=$(gettop)
         cd $T > /dev/null
-        vendor/twrp/build/tools/roomservice.py $product
+        vendor/shrp/build/tools/roomservice.py $product
         cd - > /dev/null
         check_product $product
     else
         T=$(gettop)
         cd $T > /dev/null
-        vendor/twrp/build/tools/roomservice.py $product true
+        vendor/shrp/build/tools/roomservice.py $product true
         cd - > /dev/null
     fi
 
@@ -1864,6 +1866,16 @@ function showcommands() {
           -f $OUT_DIR/combined-${TARGET_PRODUCT}.ninja \
           -t commands "$@")
     fi
+}
+
+#SHRP PY Addition
+function shrp()
+{
+    python3 $(gettop)/build/shrp/shrp.py
+}
+function SHRP()
+{
+    python3 $(gettop)/build/shrp/shrp.py
 }
 
 validate_current_shell

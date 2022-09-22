@@ -4,6 +4,59 @@
 # intermedites-dir-for
 LOCAL_PATH := $(BUILD_SYSTEM)
 
+SHELL_EXPORT := $(foreach v,$(MAKE_ENV),$(v)='$($(v))')
+
+# -----------------------------------------------------------------
+# SHRP
+SHRP_BUILD_VARS := \
+	"$(DATE_FROM_FILE),\
+	$(SHRP_MAINTAINER),\
+	$(SHRP_DEVICE_CODE),\
+	$(SHRP_OFFICIAL),\
+	$(SHRP_EXPRESS),\
+	$(SHRP_DARK),\
+	$(SHRP_ALT_REBOOT),\
+	$(SHRP_REC),\
+	$(SHRP_AB),\
+	$(TARGET_RECOVERY_ROOT_OUT),\
+	$(SHRP_EXTERNAL_ADDON_PATH),\
+	$(SHRP_EXCLUDE_DEFAULT_ADDONS),\
+	$(SHRP_SKIP_DEFAULT_ADDON_1),\
+	$(SHRP_SKIP_DEFAULT_ADDON_2),\
+	$(SHRP_SKIP_DEFAULT_ADDON_3),\
+	$(SHRP_SKIP_DEFAULT_ADDON_4),\
+	$(SHRP_EXTERNAL_ADDON_1_FILENAME),\
+	$(SHRP_EXTERNAL_ADDON_2_FILENAME),\
+	$(SHRP_EXTERNAL_ADDON_3_FILENAME),\
+	$(SHRP_EXTERNAL_ADDON_4_FILENAME),\
+	$(SHRP_EXTERNAL_ADDON_5_FILENAME),\
+	$(SHRP_EXTERNAL_ADDON_6_FILENAME),\
+	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_1),\
+	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_2),\
+	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_3),\
+	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_4),\
+	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_5),\
+	$(SHRP_INC_IN_REC_EXTERNAL_ADDON_6),\
+	$(INC_IN_REC_MAGISK),\
+	$(TW_HAS_RECOVERY_PARTITION),\
+	$(IS_OFFICIAL),\
+	$(INC_IN_REC_ADDON_1),\
+	$(INC_IN_REC_ADDON_2),\
+	$(INC_IN_REC_ADDON_3),\
+	$(INC_IN_REC_ADDON_4),\
+	$(SHRP_LITE)"
+
+ifneq ($(BUILD_WITH_COLORS),0)
+  CL_RED="\033[31m"
+  CL_GRN="\033[32m"
+  CL_YLW="\033[33m"
+  CL_BLU="\033[34m"
+  CL_MAG="\033[35m"
+  CL_CYN="\033[36m"
+  CL_RST="\033[0m"
+endif
+###/SHRP###
+
 # -----------------------------------------------------------------
 # Define rules to copy PRODUCT_COPY_FILES defined by the product.
 # PRODUCT_COPY_FILES contains words like <source file>:<dest file>[:<owner>].
@@ -2232,6 +2285,7 @@ $(INTERNAL_RECOVERY_RAMDISK_FILES_TIMESTAMP): $(MKBOOTFS) \
 	# Making recovery image
 	mkdir -p $(TARGET_RECOVERY_OUT)
 	mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/sdcard $(TARGET_RECOVERY_ROOT_OUT)/tmp
+	mkdir -p $(PRODUCT_OUT)/zip/Files/SHRP/data
 	# Copying baseline ramdisk...
 	# Use rsync because "cp -Rf" fails to overwrite broken symlinks on Mac.
 	rsync -a --exclude=sdcard $(IGNORE_RECOVERY_SEPOLICY) $(IGNORE_CACHE_LINK) $(TARGET_ROOT_OUT) $(TARGET_RECOVERY_OUT)
@@ -2258,6 +2312,10 @@ $(INTERNAL_RECOVERY_RAMDISK_FILES_TIMESTAMP): $(MKBOOTFS) \
 	ln -sf prop.default $(TARGET_RECOVERY_ROOT_OUT)/default.prop
 	cd $(TARGET_RECOVERY_ROOT_OUT) && touch ramdisk-files.txt && touch ramdisk-files.sha256sum && find . | sed "s/.\///" | sed "/lib\/modules\//d" > ramdisk-files.txt
 	cd $(TARGET_RECOVERY_ROOT_OUT) && find -type f | sed "s/.\/ramdisk-files.sha256sum//" | sed "/lib\/modules/d" | sed "/prop.default/d" | xargs sha256sum > ramdisk-files.sha256sum
+	
+### SHRP - STARTING BUILD ###
+	$(hide) bash $(TOPDIR)build/make/shrp/shrp.sh "$(SHRP_BUILD_VARS)"
+### SHRP - END BUILD ###
 	$(BOARD_RECOVERY_IMAGE_PREPARE)
 	$(hide) touch $@
 
@@ -2359,6 +2417,9 @@ endif # BUILDING_RECOVERY_IMAGE
 
 .PHONY: recoveryimage
 recoveryimage: $(INSTALLED_RECOVERYIMAGE_TARGET) $(RECOVERY_RESOURCE_ZIP)
+###SHRP###
+	$(hide) bash vendor/shrp/shrp_final.sh "$(SHRP_BUILD_VARS)"
+###SHRP###
 
 ifneq ($(BOARD_NAND_PAGE_SIZE),)
 $(error MTD device is no longer supported and thus BOARD_NAND_PAGE_SIZE is deprecated.)
