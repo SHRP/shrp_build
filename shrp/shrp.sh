@@ -51,6 +51,11 @@ echo $SHRP_BUILD_DATE > $REC_OUT/twres/version
 
 if [[ $SHRP_AB = true ]]; then
     cp "${dir}"/vendor/shrp/magiskboot/magiskbootnt $REC_OUT/sbin/
+    chmod +x $REC_OUT/sbin/magiskbootnt
+else if [[ TW_INCLUDE_REPACKTOOLS = false ]]; then
+    cp "${dir}"/vendor/shrp/magiskboot/magiskboot $REC_OUT/system/bin/
+    chmod +x $REC_OUT/system/bin/magiskboot
+fi;
 fi;
 
 if [[ $SHRP_DARK = true ]]; then
