@@ -2388,6 +2388,9 @@ $(foreach b,$(INSTALLED_BOOTIMAGE_TARGET), $(eval $(call add-dependency,$(b),$(c
 $(INSTALLED_BOOTIMAGE_TARGET): $(recoveryimage-deps)
 	$(call pretty,"Target boot image from recovery: $@")
 	$(call build-recoveryimage-target, $@, $(PRODUCT_OUT)/$(subst .img,,$(subst boot,kernel,$(notdir $@))))
+	###SHRP###
+	$(hide) bash vendor/shrp/shrp_final.sh "$(SHRP_BUILD_VARS)"
+ 	###SHRP###
 endif # BOARD_USES_RECOVERY_AS_BOOT
 
 ifndef BOARD_CUSTOM_BOOTIMG_MK
