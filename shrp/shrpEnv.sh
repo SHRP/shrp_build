@@ -241,14 +241,13 @@ SHRP_BUILD=build/make/shrp
 SHRP_OUT=$OUT
 SHRP_WORK_DIR=$OUT/zip
 SHRP_META_DATA_DIR=$OUT/zip/META-INF
-
+RECOVERY_RAM=$OUT/ramdisk-recovery.cpio
 if [ "$SHRP_AB" != "true" ];then
     RECOVERY_IMG=$OUT/recovery.img
-    RECOVERY_RAM=$OUT/ramdisk-recovery.cpio
 else
     RECOVERY_IMG=$OUT/boot.img
-    RECOVERY_RAM=$OUT/ramdisk.cpio
 fi;
+
 
 if [ "$IS_OFFICIAL" == "1" ] && [ "$SHRP_OFFICIAL" == "true" ]; then
     XSTATUS=Official
