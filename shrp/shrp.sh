@@ -52,14 +52,18 @@ echo $SHRP_BUILD_DATE > $REC_OUT/twres/version
 if [[ $SHRP_AB = true ]]; then
     cp "${dir}"/vendor/shrp/magiskboot/magiskbootnt $REC_OUT/sbin/
     chmod +x $REC_OUT/sbin/magiskbootnt
-else if [[ TW_INCLUDE_REPACKTOOLS = false ]]; then
+elif [[ TW_INCLUDE_REPACKTOOLS = false ]]; then
     cp "${dir}"/vendor/shrp/magiskboot/magiskboot $REC_OUT/system/bin/
     chmod +x $REC_OUT/system/bin/magiskboot
 fi;
-fi;
+
+# # Copy some theme parts manually for shrp reflashing
+cp -r "${dir}"/bootable/recovery/gui/theme/shrp_resourses/universal/* $REC_OUT/twres/
 
 if [[ $SHRP_DARK = true ]]; then
-cp -r "${dir}"/bootable/recovery/gui/theme/shrp_dark/* $REC_OUT/twres/
+    cp -r "${dir}"/bootable/recovery/gui/theme/shrp_resourses/dark/* $REC_OUT/twres/
+else
+    cp -r "${dir}"/bootable/recovery/gui/theme/shrp_resourses/white/* $REC_OUT/twres/
 fi;
 
 if [[ $SHRP_LITE = true ]]; then
