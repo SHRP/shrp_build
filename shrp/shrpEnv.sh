@@ -233,7 +233,7 @@ INC_IN_REC_ADDON_4=$(echo "$ARGS" | cut -d "," -f 35)
 SHRP_LITE=$(echo "$ARGS" | cut -d "," -f 36)
 
 SHRP_VERSION=3.1
-SHRP_STATUS=Beta
+SHRP_STATUS=Stable
 
 SHRP_VENDOR=vendor/shrp
 MAGISKBOOT=$SHRP_VENDOR/magiskboot/magiskboot
