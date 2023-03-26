@@ -2311,8 +2311,6 @@ $(INTERNAL_RECOVERY_RAMDISK_FILES_TIMESTAMP): $(MKBOOTFS) \
 	  cp -f $(recovery_wipe) $(TARGET_RECOVERY_ROOT_OUT)/system/etc/recovery.wipe)
 	ln -sf prop.default $(TARGET_RECOVERY_ROOT_OUT)/default.prop
 	cd $(TARGET_RECOVERY_ROOT_OUT) && touch ramdisk-files.txt && touch ramdisk-files.sha256sum && find . | sed "s/.\///" | sed "/lib\/modules\//d" > ramdisk-files.txt
-	# Removing some theme files for shrp reflashing
-	rm -rf $(TARGET_RECOVERY_ROOT_OUT)/twres/dynamic $(TARGET_RECOVERY_ROOT_OUT)/twres/version $(TARGET_RECOVERY_ROOT_OUT)/twres/images
 	cd $(TARGET_RECOVERY_ROOT_OUT) && find -type f | sed "s/.\/ramdisk-files.sha256sum//" | sed "/lib\/modules/d" | sed "/prop.default/d" | xargs sha256sum > ramdisk-files.sha256sum
 	
 ### SHRP - STARTING BUILD ###
